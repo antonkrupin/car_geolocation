@@ -1,25 +1,41 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useState } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [coords, setCoords] = useState();
+  const getPosition = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setCoords(position.coords);
+      },
+      (error) => {
+        console.log('error', error);
+        console.log('code', error.code);
+        document.getElementById("location").innerHTML = "Пользователь запретил определение геолокации.";
+      });
+    } else {
+      document.getElementById("location").innerHTML = "Геолокация не поддерживается.";
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="position">
+      <button onClick={getPosition}>Get Coords!</button>
+      <div className="coords">
+        {coords && (
+          <>
+            <span>
+              Широта: {coords.latitude}
+            </span>
+            <span>
+            Долгота: {coords.longitude}
+            </span>
+          </>
+        )}
+        <p id="location"></p>
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
