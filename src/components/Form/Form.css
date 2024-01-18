@@ -13,7 +13,7 @@
 .invoiceForm input {
   padding: 10px;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   border: 1px solid black;
 }
 
@@ -22,6 +22,7 @@
   background-color: #4ecab5;
   color: white;
   padding: 10px;
+  margin-bottom: 20px;
   border: 1px solid #4ecab5;
   cursor: pointer;
 }
@@ -31,6 +32,12 @@
   color: rgb(19, 17, 17);
 }
 
+.invoiceForm button:disabled {
+  background-color: grey;
+  border: none;
+}
+
 .formErrors {
+  max-width: 400px;
   color: rgb(173, 31, 31);
 }
