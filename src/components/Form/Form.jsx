@@ -4,16 +4,19 @@ import './Form.css';
 
 const Form = () => {
   const [coords, setCoords] = useState();
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
   const getPosition = () => {
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition((position) => {
         setError('');
         setCoords(position.coords);
+        console.log(navigator);
       },
       (error) => {
         switch(error.code) {
           case 1:
+            console.log(navigator);
+            console.log(navigator.permissions);
             setError('Вы запретили получение данных геолокации. Разрешите получение данных геолокации в браузере.');
             break;
           case 2:
@@ -44,7 +47,7 @@ const Form = () => {
         />
         <button
           type="submit"
-          disabled={error === '' ? false : true}
+          //disabled={error ? true : false}
         >
           Получить информацию
         </button>
