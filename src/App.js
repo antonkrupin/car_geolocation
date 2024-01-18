@@ -1,5 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+
+import Header from './components/Header/Header';
+import Form from './components/Form/Form';
+
 import './App.css';
 
 const App = () => {
@@ -20,22 +24,26 @@ const App = () => {
     }
   }
   return (
-    <div className="position">
-      <button onClick={getPosition}>Get Coords!</button>
-      <div className="coords">
-        {coords && (
-          <>
-            <span>
-              Широта: {coords.latitude}
-            </span>
-            <span>
-            Долгота: {coords.longitude}
-            </span>
-          </>
-        )}
-        <p id="location"></p>
+    <>
+      <Header />
+      <Form />
+      <div className="position">
+        <button onClick={getPosition}>Get Coords!</button>
+        <div className="coords">
+          {coords && (
+            <>
+              <span>
+                Широта: {coords.latitude}
+              </span>
+              <span>
+              Долгота: {coords.longitude}
+              </span>
+            </>
+          )}
+          <p id="location"></p>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
