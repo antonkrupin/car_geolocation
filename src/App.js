@@ -6,14 +6,15 @@ const App = () => {
   const [coords, setCoords] = useState();
   const getPosition = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.watchPosition((position) => {
+				console.log(position.coords);
         setCoords(position.coords);
-      },
+      }/*,
       (error) => {
         console.log('error', error);
         console.log('code', error.code);
         document.getElementById("location").innerHTML = "Пользователь запретил определение геолокации.";
-      });
+      }*/);
     } else {
       document.getElementById("location").innerHTML = "Геолокация не поддерживается.";
     }
