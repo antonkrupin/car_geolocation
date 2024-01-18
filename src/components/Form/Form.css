@@ -1,0 +1,36 @@
+.invoiceForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.invoiceForm form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.invoiceForm input {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+}
+
+.invoiceForm button {
+  border-radius: 5px;
+  background-color: #4ecab5;
+  color: white;
+  padding: 10px;
+  border: 1px solid #4ecab5;
+  cursor: pointer;
+}
+
+.invoiceForm button:hover {
+  background-color: transparent;
+  color: rgb(19, 17, 17);
+}
+
+.formErrors {
+  color: rgb(173, 31, 31);
+}
