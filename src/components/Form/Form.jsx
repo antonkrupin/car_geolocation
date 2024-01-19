@@ -64,11 +64,6 @@ const Form = () => {
           Получить информацию
         </button>
       </form>
-      {error && (
-        <div className="formErrors">
-          {error}
-        </div>
-      )}
       {coords && (
         <div className="coords">
           <span>Долгота: {coords[0]}</span>
