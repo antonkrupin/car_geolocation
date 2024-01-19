@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	error: null,
-	coords: [],
+	coords: null,
 }
 
 const slice = createSlice({
