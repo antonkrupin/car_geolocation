@@ -1,33 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {
+	setCoords,
+	setError,
+} from '../../slices/mainReducer';
+
+import {
+	fetchCoords,
+	fetchError
+} from '../../slices/selectors';
 
 import './Form.css';
 
 const Form = () => {
-  const [coords, setCoords] = useState();
-  const [error, setError] = useState(null);
+	const dispatch = useDispatch();
+	const error = useSelector(fetchError);
+	const coords = useSelector(fetchCoords);
+
   const getPosition = () => {
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition((position) => {
-        setError('');
-        setCoords(position.coords);
-        console.log(navigator);
+        dispatch(setError(null));
+        dispatch(setCoords([position.coords.latitude, position.coords.longitude]));
       },
       (error) => {
         switch(error.code) {
           case 1:
-            console.log(navigator);
-            console.log(navigator.permissions);
-            setError('Вы запретили получение данных геолокации. Разрешите получение данных геолокации в браузере.');
+            //console.log(navigator);
+            //console.log(navigator.permissions);
+            dispatch(setError('Вы запретили получение данных геолокации. Разрешите получение данных геолокации в браузере.'));
             break;
           case 2:
-            setError('Не удалось получить геолокацию.');
+            dispatch(setError('Не удалось получить геолокацию.'));
             break;
           default: 
-           setError('Не удалось получить геолокацию.');
+           dispatch(setError('Не удалось получить геолокацию.'));
         }
       });
     } else {
-      setError("Геолокация не поддерживается.");
+      dispatch(setError("Геолокация не поддерживается."));
     }
   }
   const formHandler = (e) => {
@@ -47,7 +59,7 @@ const Form = () => {
         />
         <button
           type="submit"
-          //disabled={error ? true : false}
+          disabled={error ? true : false}
         >
           Получить информацию
         </button>
@@ -59,8 +71,8 @@ const Form = () => {
       )}
       {coords && (
         <div className="coords">
-          <span>Долгота: {coords.latitude}</span>
-          <span>Широта: {coords.longitude}</span>
+          <span>Долгота: {coords[0]}</span>
+          <span>Широта: {coords[1]}</span>
         </div>
       )}
     </div>
