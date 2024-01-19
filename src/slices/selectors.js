@@ -1,0 +1,1 @@
+export const fetchError = (state) => state.main.error;
