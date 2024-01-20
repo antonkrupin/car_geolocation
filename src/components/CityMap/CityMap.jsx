@@ -1,19 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { YMaps, Map, Placemark, Circle, ZoomControl } from '@pbe/react-yandex-maps';
+
+import { fetchCoords } from '../../slices/selectors';
 
 
 const CityMap = () => {
+  const coords = useSelector(fetchCoords);
   return (
     <YMaps>
       <div>
         <Map
-          defaultState={{ center: [59.122675, 37.903452], zoom: 12 }}
+          defaultState={{ center: [61.889592, 34.244612], zoom: 12 }}
           width="100%"
           height="55vh"
         >
           <Placemark
             //modules={["geoObject.addon.balloon"]}
-            geometry={[59.122675, 37.903452]}
+            geometry={[61.889592, 34.244612]}
             /*properties={{
               balloonContentBody:
                 [i18next.t('header.clubs.drevlyanka.location'),i18next.t('header.clubs.drevlyanka.address')].join(',')
@@ -27,7 +31,7 @@ const CityMap = () => {
           />
           <Placemark
             modules={["geoObject.addon.balloon"]}
-            geometry={[59.132058, 37.860000]}
+            geometry={[coords[0], coords[1]]}
             /*properties={{
               balloonContentBody:
                 [i18next.t('header.clubs.drevlyanka.location'),i18next.t('header.clubs.drevlyanka.address')].join(',')
@@ -40,7 +44,7 @@ const CityMap = () => {
             }}
           />
           <Circle 
-            geometry={[[59.122675, 37.903452], 5000]}
+            geometry={[[61.889592, 34.244612], 5000]}
             options={{
               draggable: false,
               fillColor: "#DB709377",
@@ -57,3 +61,5 @@ const CityMap = () => {
 };
 
 export default CityMap;
+//61.889592, 34.244612 шуя
+//59.122675, 37.903452 череповец
