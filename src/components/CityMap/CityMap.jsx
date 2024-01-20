@@ -29,7 +29,8 @@ const CityMap = () => {
               //iconImageHref: 'images/map_pointer_icon_1.png',
             }}
           />
-          <Placemark
+          {coords && (
+            <Placemark
             modules={["geoObject.addon.balloon"]}
             geometry={[coords[0], coords[1]]}
             /*properties={{
@@ -43,6 +44,7 @@ const CityMap = () => {
               //iconImageHref: 'images/map_pointer_icon_1.png',
             }}
           />
+          )}
           <Circle 
             geometry={[[61.889592, 34.244612], 5000]}
             options={{
