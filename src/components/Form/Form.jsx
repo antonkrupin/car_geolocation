@@ -29,7 +29,7 @@ const Form = () => {
           case 1:
             //console.log(navigator);
             //console.log(navigator.permissions);
-            dispatch(setError('Вы запретили получение данных геолокации. Разрешите получение данных геолокации в браузере.'));
+            dispatch(setError('Функционал приложения недоступн без геолокации. Обновите страницу и разрешите доступ.'));
             break;
           case 2:
             dispatch(setError('Не удалось получить геолокацию.'));
