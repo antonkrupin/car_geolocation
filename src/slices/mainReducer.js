@@ -3,6 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	error: null,
 	coords: null,
+	geolocationAccess: false,
+	phone: '',
+	orders: [],
 }
 
 const slice = createSlice({
@@ -10,8 +13,16 @@ const slice = createSlice({
 	initialState,
 	reducers: {
 		setCoords: (state, action) => {
-			console.log(action.payload);
 			state.coords = action.payload;
+		},
+		setGeolocationAccess: (state, action) => {
+			state.geolocationAccess = !state.geolocationAccess;
+		},
+		setPhone: (state, action) => {
+			state.phone = action.payload;
+		},
+		setOrders: (state, action) => {
+			state.orders = action.payload;
 		},
 		setError: (state, action) => {
 			state.error = action.payload;
@@ -21,6 +32,9 @@ const slice = createSlice({
 
 export const {
 	setCoords,
+	setGeolocationAccess,
+	setPhone,
+	setOrders,
 	setError,
 } = slice.actions;
 
