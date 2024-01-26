@@ -1,0 +1,31 @@
+.geolocationAccess {
+	width: var(--main-width);
+	height: var(--main-height);
+	margin: 180px 20px 0px 20px;
+}
+
+.geolocationAccess__content h3 {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 31px;
+	letter-spacing: -2%;
+	color: var(--main-text-color);
+	margin: 0;
+}
+
+.geolocationAccess__content h4 {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16.8px;
+	letter-spacing: -2%;
+	color: var(--grey-color);
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.geolocationAccess__content img {
+	display: block;
+	margin: 0 auto;
+}

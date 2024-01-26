@@ -1,3 +1,14 @@
+:root {
+	--main-width: 360px;
+	--main-height: 730px;
+	--main-text-color: rgba(17, 17, 17, 1);
+	--grey-color: rgba(144, 144, 144, 1);
+	--blue-color: rgba(0, 47, 108, 1);
+	--button-fill-color: rgba(0, 65, 160, 1);
+	--red-color: rgba(255, 0, 0, 1);
+}
+
+
 .App {
   text-align: center;
 }
@@ -28,17 +39,13 @@
   color: #61dafb;
 }
 
-.position {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 10px;
-}
-
-.coords {
-  display: flex;
-  flex-direction: column;
+.app {
+	display: flex;
+	justify-content: center;
+	width: var(--main-width);
+	max-height: var(--main-height);
+	margin: 0 auto;
+	background:#fff;
 }
 
 @keyframes App-logo-spin {

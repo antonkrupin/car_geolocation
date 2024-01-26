@@ -1,0 +1,22 @@
+.startPage {
+	width: var(--main-width);
+	height: var(--main-height);
+	background-image: url('../../../public/images/backgroudMobile.png');
+	background-repeat: no-repeat;
+	background-position: bottom right 0px;
+}
+
+.startPage__content {
+	width: 255px;
+	margin: 0 auto;
+	margin-top: 150px;
+}
+
+.startPage__content h1 {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 30px;
+	color: var(--blue-color);
+	margin-top: 10px;
+}

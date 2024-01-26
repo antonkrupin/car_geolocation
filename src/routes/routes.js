@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 export default {
-	geolocationRequest: () => '/',
+	startPage: () => '/',
+	geolocationAccess: () => '/geolocationAccess',
 	loginPage: () => '/login',
 	accessConfirmation: () => '/accessConfirmation',
 	freightOrders: () => '/freightOrders/:phone',
