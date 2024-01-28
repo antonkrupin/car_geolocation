@@ -1,0 +1,4 @@
+.ordersList {
+  display: flex;
+  flex-direction: column;
+}

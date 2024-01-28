@@ -1,0 +1,104 @@
+.accessConfirmation {
+  width: var(--main-width);
+  height: var(--main-height);
+}
+
+.accessConfirmation__content {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.accessConfirmation__content h4 {
+  font-family: 'GrtskPeta-Regular';
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: -2%;
+  color: var(--main-text-color);
+  margin-top: 15px;
+  margin-bottom: 32px;
+}
+
+.accessConfirmation__content form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.accessConfirmation__content form input {
+  width: 68px;
+  height: 48px;
+
+  font-family: 'GrtskPeta-Regular';
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: -2%;
+  color: var(--main-text-color);
+  text-align: center;
+
+  border: none;
+  border-bottom: 2px solid var(--grey-color);
+  outline: none;
+}
+
+.accessConfirmation__content form input:focus {
+  color: var(--button-fill-color);
+  border-bottom: 2px solid var(--button-fill-color);
+  outline: none;
+}
+
+.accessConfirmation__content h3 {
+  font-family: 'GrtskPeta-Regular';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -2%;
+  color: var(--grey-color);
+  margin-bottom: 32px;
+}
+
+.accessConfirmation__content button {
+  width: 100%;
+	height: 44px;
+	font-family: 'GrtskPeta-Regular';
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: -2%;
+	color: var(--white-color);
+	background-color: var(--button-fill-color);
+	border-radius: 24px;
+	border: none;
+	cursor: pointer;
+}
+
+.accessConfirmation__content button:disabled {
+	color: var(--grey-color);
+	background-color: rgba(244, 244, 244, 1);
+	cursor: auto;
+}
+
+.accessConfirmation__backButton {
+  display: flex;
+  align-items: center;
+  width: 84px;
+  margin-top: 66px;
+  cursor: pointer;
+}
+
+.accessConfirmation__backButton img {
+  width: 19px;
+  height: 14px;
+}
+
+.accessConfirmation__backButton h4 {
+  font-family: 'GrtskPeta-Regular';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -2%;
+  color: var(--blue-color);
+  margin: 0 0 0 8px;
+}

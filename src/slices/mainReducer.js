@@ -6,6 +6,7 @@ const initialState = {
 	geolocationAccess: false,
 	phone: '',
 	orders: [],
+	code: '',
 }
 
 const slice = createSlice({
@@ -21,6 +22,9 @@ const slice = createSlice({
 		setPhone: (state, action) => {
 			state.phone = action.payload;
 		},
+		setCode: (state, action) => {
+			state.code = action.payload;
+		},
 		setOrders: (state, action) => {
 			state.orders = action.payload;
 		},
@@ -34,6 +38,7 @@ export const {
 	setCoords,
 	setGeolocationAccess,
 	setPhone,
+	setCode,
 	setOrders,
 	setError,
 } = slice.actions;

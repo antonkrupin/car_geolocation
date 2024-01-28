@@ -68,10 +68,54 @@
 	font-weight: 400;
 	line-height: 24px;
 	letter-spacing: -2%;
+	color: var(--white-color);
+	background-color: var(--button-fill-color);
 	border-radius: 24px;
 	border: none;
+	cursor: pointer;
 }
 
 .loginPage__content form button:disabled {
+	color: var(--grey-color);
 	background-color: rgba(244, 244, 244, 1);
+	cursor: auto;
+}
+
+.spinner {
+  animation: rotate 2s linear infinite;
+  z-index: 2;
+  position: relative;
+  top: 0%;
+  left: 0%;
+  margin: 8px 0 0 0px;
+  width: 21px;
+  height: 21px;
+  
+  & .path {
+    stroke: var(--grey-color);
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+  
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
 }

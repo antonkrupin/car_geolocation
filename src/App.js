@@ -6,8 +6,9 @@ import Header from "./components/Header/Header";
 import StartPage from "./routes/StartPage/StartPage";
 import GeolocationAccess from "./routes/GeolocationAccess/GeolocationAccess";
 import LoginPage from "./routes/LoginPage/LoginPage";
-import AccessConfirmation from "./routes/AccessConfirmation";
-import FreightOrders from "./routes/FreightOrders";
+import AccessConfirmation from "./routes/AccessConfirmation/AccessConfirmation";
+import PersonalDataConfirmation from "./routes/PersonalDataConfirmation/PersonalDataConfirmation";
+import FreightOrders from "./routes/FreightOrders/FreightOrders";
 import FreightOrderDetails from "./routes/FreightOrderDetails";
 import FreightOrederRegistration from "./routes/FreightOrderRegistration";
 import EarlyOrderSign from "./routes/EarlyOrderSign";
@@ -30,6 +31,10 @@ const App = () => {
           <Route
             path={routes.accessConfirmation()}
             element={<AccessConfirmation />}
+          />
+          <Route
+            path={routes.personalDataConfirmation()}
+            element={<PersonalDataConfirmation />}
           />
           <Route path={routes.freightOrders()} element={<FreightOrders />} />
           <Route

@@ -4,6 +4,7 @@ export default {
 	geolocationAccess: () => '/geolocationAccess',
 	loginPage: () => '/login',
 	accessConfirmation: () => '/accessConfirmation',
+	personalDataConfirmation: () => '/personalDataConfirmation/:phone',
 	freightOrders: () => '/freightOrders/:phone',
 	freightOrderDetails: () => '/details/:id',
 	freightOrederRegistration: () => '/registration/:id',

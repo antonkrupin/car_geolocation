@@ -1,0 +1,41 @@
+.orderItem {
+  display: flex;
+}
+
+.orderItem img {
+  width: 20%;
+}
+
+.orderItem div {
+  width: 60%;
+}
+
+.orderItem h3 {
+  font-family: 'GrtskPeta-Bold';
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 30px;
+	letter-spacing: -2%;
+  color: var(--main-text-color);
+  margin: 0;
+}
+
+.orderItem h4 {
+  font-family: 'GrtskPeta-Regular';
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 30px;
+	letter-spacing: -2%;
+  color: var(--red-color);
+  margin: 0;
+}
+
+.orderItem h5 {
+  font-family: 'GrtskPeta-Regular';
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 16px;
+	letter-spacing: -1px;
+  color: var(--blue-color);
+  margin: 0;
+}
