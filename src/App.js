@@ -10,7 +10,7 @@ import AccessConfirmation from "./routes/AccessConfirmation/AccessConfirmation";
 import PersonalDataConfirmation from "./routes/PersonalDataConfirmation/PersonalDataConfirmation";
 import FreightOrders from "./routes/FreightOrders/FreightOrders";
 import FreightOrderDetails from "./routes/FreightOrderDetails";
-import FreightOrederRegistration from "./routes/FreightOrderRegistration";
+import FreightOrederRegistration from "./routes/FreightOrderRegistration/FreightOrderRegistration";
 import EarlyOrderSign from "./routes/EarlyOrderSign";
 
 import routes from "./routes/routes";
