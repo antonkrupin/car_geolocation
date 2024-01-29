@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 
 import { setPhone } from "../../slices/mainReducer";
@@ -9,6 +9,7 @@ import "./LoginPage.css";
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const phoneInputRef = useRef();
   const [phone, setPhoneNumber] = useState("+7");
   const [error, setError] = useState();
@@ -27,7 +28,7 @@ const LoginPage = () => {
       .filter((el) => !isNaN(Number(el)))
       .join("");
     dispatch(setPhone(formattedPhone));
-    navigate("/accessConfirmation");
+    navigate("/accessConfirmation", {state: { "prev": location.pathname }});
   };
 
   const formHandler = (e) => {
