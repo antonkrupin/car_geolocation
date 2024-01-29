@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { setCode } from "../../slices/mainReducer";
 import { fetchPhone } from "../../slices/selectors";
 
+import BackwardButton from "../../components/BackwardButton/BackwardButton";
+
 import "./AccessConfirmation.css";
 
 const AccessConfirmation = () => {
@@ -75,13 +77,7 @@ const AccessConfirmation = () => {
   return (
     <div className="accessConfirmation">
       <div className="accessConfirmation__content">
-        <div
-          onClick={backButtonHandler}
-          className="accessConfirmation__backButton"
-        >
-          <img src="images/icons/back.png" alt="Назад" />
-          <h4>Назад</h4>
-        </div>
+        <BackwardButton />
         <h4>Введите код из SMS-сообщения</h4>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
@@ -118,3 +114,16 @@ const AccessConfirmation = () => {
 };
 
 export default AccessConfirmation;
+
+/*
+
+<div
+          onClick={backButtonHandler}
+          className="accessConfirmation__backButton"
+        >
+          <img src="images/icons/back.png" alt="Назад" />
+          <h4>Назад</h4>
+        </div>
+
+*/
+
