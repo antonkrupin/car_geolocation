@@ -1,16 +1,24 @@
 .orderItem {
   display: flex;
+	align-items: center;
+	height: 98px;
+	justify-content: space-around;
+	background-color: rgba(244, 244, 244, 1);
+	margin-bottom: 12px;
+	padding: 16px;
 }
 
 .orderItem img {
-  width: 20%;
+  width: 44px;
+	height: 44px;
+	margin-right: 16px;
 }
 
 .orderItem div {
-  width: 60%;
+  width: 65%;
 }
 
-.orderItem h3 {
+.orderItem_id {
   font-family: 'GrtskPeta-Bold';
 	font-size: 20px;
 	font-weight: 600;
@@ -20,7 +28,7 @@
   margin: 0;
 }
 
-.orderItem h4 {
+.orderItem_city {
   font-family: 'GrtskPeta-Regular';
 	font-size: 14px;
 	font-weight: 400;
@@ -30,7 +38,7 @@
   margin: 0;
 }
 
-.orderItem h5 {
+.orderItem_status {
   font-family: 'GrtskPeta-Regular';
 	font-size: 14px;
 	font-weight: 400;
@@ -38,4 +46,14 @@
 	letter-spacing: -1px;
   color: var(--blue-color);
   margin: 0;
+}
+
+.freightOrders__content .orderItem_button {
+	width: 44px;
+	margin-right: 16px;
+	border: none;
+}
+
+.freightOrders__content .orderItem_button img {
+	margin: 0;
 }
