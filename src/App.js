@@ -1,5 +1,4 @@
 import React from "react";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
@@ -9,7 +8,7 @@ import LoginPage from "./routes/LoginPage/LoginPage";
 import AccessConfirmation from "./routes/AccessConfirmation/AccessConfirmation";
 import PersonalDataConfirmation from "./routes/PersonalDataConfirmation/PersonalDataConfirmation";
 import FreightOrders from "./routes/FreightOrders/FreightOrders";
-import FreightOrderDetails from "./routes/FreightOrderDetails";
+import FreightOrderDetails from "./routes/FreightOrderDetails/FreightOrderDetails";
 import FreightOrederRegistration from "./routes/FreightOrderRegistration/FreightOrderRegistration";
 import EarlyOrderSign from "./routes/EarlyOrderSign";
 
