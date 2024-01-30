@@ -1,0 +1,22 @@
+.backwardButton {
+  display: flex;
+  align-items: center;
+  width: 84px;
+  margin-top: 66px;
+  cursor: pointer;
+}
+
+.backwardButton img {
+  width: 19px;
+  height: 14px;
+}
+
+.bacwardButton__text {
+  font-family: 'GrtskPeta-Regular';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -2%;
+  color: var(--blue-color);
+  margin: 0 0 0 8px;
+}
