@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header/Header";
 import StartPage from "./routes/StartPage/StartPage";
 import GeolocationAccess from "./routes/GeolocationAccess/GeolocationAccess";
 import LoginPage from "./routes/LoginPage/LoginPage";
@@ -10,7 +9,6 @@ import PersonalDataConfirmation from "./routes/PersonalDataConfirmation/Personal
 import FreightOrders from "./routes/FreightOrders/FreightOrders";
 import FreightOrderDetails from "./routes/FreightOrderDetails/FreightOrderDetails";
 import FreightOrederRegistration from "./routes/FreightOrderRegistration/FreightOrderRegistration";
-import EarlyOrderSign from "./routes/EarlyOrderSign";
 
 import routes from "./routes/routes";
 
@@ -44,7 +42,6 @@ const App = () => {
             path={routes.freightOrederRegistration()}
             element={<FreightOrederRegistration />}
           />
-          <Route path={routes.earlyOrderSign()} element={<EarlyOrderSign />} />
         </Routes>
       </div>
     </BrowserRouter>
