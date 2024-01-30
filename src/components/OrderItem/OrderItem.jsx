@@ -11,8 +11,7 @@ const OrderItem = (props) => {
 	
 	const navigate = useNavigate();
 	const location = useLocation();
-	console.log('location orderitem', location.pathname);
-
+	
 	const buttonHandler = () => {
 		navigate(`/details/${order.id}`, {state: { "prev": location.pathname }});
 	};
