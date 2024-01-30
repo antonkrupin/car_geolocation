@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router';
 
+import backArrow from '../../images/icons/backArrow.png';
 import './BackwardButton.css';
 
 const BackwardButton = () => {
@@ -14,10 +15,10 @@ const BackwardButton = () => {
   return (
     <div
       onClick={backButtonHandler}
-      className="accessConfirmation__backButton"
+      className="backwardButton"
     >
-      <img src="images/icons/back.png" alt="Назад" />
-      <h4>Назад</h4>
+      <img src={backArrow} alt="Назад" />
+      <h4 className="bacwardButton__text">Назад</h4>
     </div>
   )
 };
