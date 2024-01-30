@@ -1,15 +1,14 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import backArrow from '../../images/icons/backArrow.png';
 import './BackwardButton.css';
 
 const BackwardButton = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const backButtonHandler = () => {
-    navigate(location.state.prev);
+    navigate(-1);
   };
 
   return (
