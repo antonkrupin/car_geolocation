@@ -8,7 +8,6 @@ const GeolocationAccess = () => {
   const [geolocationAccess, setGeolocationAccess] = useState(true);
 
   useEffect(() => {
-    console.log(navigator);
     navigator.geolocation.getCurrentPosition(
       (position) => {
         //dispatch(setCoords([position.coords.latitude, position.coords.longitude]));
