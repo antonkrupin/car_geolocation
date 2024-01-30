@@ -64,7 +64,7 @@ const FreightOrderRegistration = () => {
     e.preventDefault();
     setLoading(true);
     dispatch(changeOrder({ id: id, status: 1, loadingSlot: loadingSlot }));
-    setTimeout(redirectTest, 20000);
+    setTimeout(redirectTest, 2000);
   };
 
   return (
@@ -114,13 +114,10 @@ const FreightOrderRegistration = () => {
         </div>
       )}
       {loading && (
-				<>
+				<div className="freigthOrderRegistration">
 					<h1>Регистрация</h1>
-					<Spinner size="big"/>
-					<Spinner />
 					<Spinner size="big" color="blue"/>
-					<Spinner color="blue"/>
-				</>
+				</div>
 			)}
     </>
   );
