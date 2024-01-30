@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { setOrders } from '../../slices/mainReducer';
 
+import FilledButton from '../../components/FilledButton/FilledButton';
+
 import './PersonalDataConfirmation.css';
 
 const TEST_ORDERS = {
@@ -86,10 +88,14 @@ const PersonalDataConfirmation = () => {
           </div>
         </div>
         <h6>Если данные некорректные свяжитесь пожалуйста с диспетчером</h6>
-        <button onClick={buttonClickHandler} >Подтвердить</button>
+				<FilledButton onClick={buttonClickHandler} buttonText="Подтвердить" />
       </div>
     </div>
   )
 };
 
 export default PersonalDataConfirmation;
+
+/*
+<button onClick={buttonClickHandler}>Подтвердить</button>
+*/
