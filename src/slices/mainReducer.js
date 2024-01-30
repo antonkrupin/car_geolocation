@@ -19,6 +19,15 @@ const slice = createSlice({
 		setGeolocationAccess: (state, action) => {
 			state.geolocationAccess = !state.geolocationAccess;
 		},
+		changeOrder: (state, action) => {
+			const { id, status, loadingSlot } = action.payload;
+			state.orders[1].forEach((order) => {
+				if (order.id === id) {
+					order.status = status;
+					order.loadingSlot = loadingSlot
+				}
+			})
+		},
 		setPhone: (state, action) => {
 			state.phone = action.payload;
 		},
@@ -37,6 +46,7 @@ const slice = createSlice({
 export const {
 	setCoords,
 	setGeolocationAccess,
+	changeOrder,
 	setPhone,
 	setCode,
 	setOrders,
