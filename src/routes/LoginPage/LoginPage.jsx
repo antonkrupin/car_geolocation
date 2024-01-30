@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 
 import { setPhone } from "../../slices/mainReducer";
 
+import FilledButton from "../../components/FilledButton/FilledButton";
+
 import "./LoginPage.css";
 
 const LoginPage = () => {
@@ -103,26 +105,10 @@ const LoginPage = () => {
               />
             </div>
             {loading && (
-              <button type="submit" disabled>
-                <svg className="spinner" viewBox="0 0 50 50">
-                  <circle
-                    className="path"
-                    cx="25"
-                    cy="25"
-                    r="20"
-                    fill="none"
-                    strokeWidth="1"
-                  ></circle>
-                </svg>
-              </button>
+							<FilledButton isSpinner disabled/>
             )}
             {!loading && (
-              <button
-                type="submit"
-                disabled={phone.length === 18 ? false : true}
-              >
-                Войти
-              </button>
+							<FilledButton buttonText="Войти" disabled={phone.length === 18 ? false : true}/>
             )}
           </form>
         </div>
@@ -135,8 +121,25 @@ export default LoginPage;
 
 /*
 
-<svg class="spinner" viewBox="0 0 50 50">
-  <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+<button type="submit" disabled>
+<svg className="spinner" viewBox="0 0 50 50">
+	<circle
+		className="path"
+		cx="25"
+		cy="25"
+		r="20"
+		fill="none"
+		strokeWidth="1"
+	></circle>
 </svg>
+</button>
 
+
+<button
+                type="submit"
+                disabled={phone.length === 18 ? false : true}
+              >
+                Войти
+              </button>
 */
+
