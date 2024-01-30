@@ -1,3 +1,33 @@
+:root {
+  --scrollbarBgColor: rgba(0, 0, 0, .05);
+  --scrollbarThumbColor: rgba(0, 0, 0, .15);
+  --scrollbarThumbColorSecond: rgba(255, 255, 255, .7);
+  --scrollbarWidth: 20rem;
+  --scrollbarBorder: 0 solid var(--scrollbarBgColor);
+  --scrollbarBorderRadius: calc(var(--scrollbarWidth) / 4);
+}
+.scrollable {
+  scrollbar-width: var(--scrollbarWidth);
+  scrollbar-color: var(--scrollbarThumbColor) var(--scrollbarBgColor);
+}
+.scrollable::-webkit-scrollbar {
+  width: var(--scrollbarWidth);
+}
+.scrollable::-webkit-scrollbar-track {
+  background: var(--scrollbarBgColor);
+  border-radius: var(--scrollbarBorderRadius);
+}
+.scrollable::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarThumbColor);
+  border-radius: var(--scrollbarBorderRadius);
+  border: var(--scrollbarBorder);
+  background-image: linear-gradient(
+    180deg,
+    var(--scrollbarThumbColor) 0%,
+    var(--scrollbarThumbColorSecond) 90%
+  );
+}
+
 .freigthOrderRegistration {
 	width: var(--main-width);
 	height: var(--main-height);
@@ -51,34 +81,4 @@
 
 .timeSelect .timeItem {
 	background-color: red;
-}
-
-:root {
-  --scrollbarBgColor: rgba(0, 0, 0, .05);
-  --scrollbarThumbColor: rgba(0, 0, 0, .15);
-  --scrollbarThumbColorSecond: rgba(255, 255, 255, .7);
-  --scrollbarWidth: 2rem;
-  --scrollbarBorder: 0 solid var(--scrollbarBgColor);
-  --scrollbarBorderRadius: calc(var(--scrollbarWidth) / 4);
-}
-.scrollable {
-  scrollbar-width: var(--scrollbarWidth);
-  scrollbar-color: var(--scrollbarThumbColor) var(--scrollbarBgColor);
-}
-.scrollable::-webkit-scrollbar {
-  width: var(--scrollbarWidth);
-}
-.scrollable::-webkit-scrollbar-track {
-  background: var(--scrollbarBgColor);
-  border-radius: var(--scrollbarBorderRadius);
-}
-.scrollable::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbarThumbColor);
-  border-radius: var(--scrollbarBorderRadius);
-  border: var(--scrollbarBorder);
-  background-image: linear-gradient(
-    180deg,
-    var(--scrollbarThumbColor) 0%,
-    var(--scrollbarThumbColorSecond) 90%
-  );
 }
