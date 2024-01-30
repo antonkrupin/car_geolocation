@@ -8,7 +8,7 @@
   margin-right: 20px;
 }
 
-.accessConfirmation__content h4 {
+.accessConfirmation__content > h4 {
   font-family: 'GrtskPeta-Regular';
   font-size: 24px;
   font-weight: 400;
@@ -78,27 +78,4 @@
 	color: var(--grey-color);
 	background-color: rgba(244, 244, 244, 1);
 	cursor: auto;
-}
-
-.accessConfirmation__backButton {
-  display: flex;
-  align-items: center;
-  width: 84px;
-  margin-top: 66px;
-  cursor: pointer;
-}
-
-.accessConfirmation__backButton img {
-  width: 19px;
-  height: 14px;
-}
-
-.accessConfirmation__backButton h4 {
-  font-family: 'GrtskPeta-Regular';
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: -2%;
-  color: var(--blue-color);
-  margin: 0 0 0 8px;
 }
