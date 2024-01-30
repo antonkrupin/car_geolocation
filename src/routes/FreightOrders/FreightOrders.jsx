@@ -7,6 +7,7 @@ import { setOrders } from "../../slices/mainReducer";
 import { fetchOrders } from "../../slices/selectors";
 
 import OrderItem from "../../components/OrderItem/OrderItem";
+import OutlinedButton from "../../components/OutlinedButton/OutlinedButton";
 
 import freightCar from "../../images/icons/freight-car.svg";
 import profileIcon from "../../images/icons/user.svg";
@@ -43,7 +44,7 @@ const FreightOrders = () => {
             Вы можете добавить приложение на экран своего смартфона нажав кнопку
             снизу
           </h6>
-          <button>Добавить на домашний экран</button>
+					<OutlinedButton buttonText="Добавить на домашний экран" />
         </div>
         <div className="freigthOrdersMenu__content">
           <div onClick={test} className="menuItem active">
