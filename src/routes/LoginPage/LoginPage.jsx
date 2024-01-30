@@ -13,6 +13,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const phoneInputRef = useRef();
+
   const [phone, setPhoneNumber] = useState("+7");
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ const LoginPage = () => {
       .filter((el) => !isNaN(Number(el)))
       .join("");
     dispatch(setPhone(formattedPhone));
-    navigate("/accessConfirmation", {state: { "prev": location.pathname }});
+    navigate("/accessConfirmation", { state: { prev: [location.pathname] } });
   };
 
   const formHandler = (e) => {
@@ -104,11 +105,12 @@ const LoginPage = () => {
                 required
               />
             </div>
-            {loading && (
-							<FilledButton isSpinner disabled/>
-            )}
+            {loading && <FilledButton isSpinner disabled />}
             {!loading && (
-							<FilledButton buttonText="Войти" disabled={phone.length === 18 ? false : true}/>
+              <FilledButton
+                buttonText="Войти"
+                disabled={phone.length === 18 ? false : true}
+              />
             )}
           </form>
         </div>
@@ -118,28 +120,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-/*
-
-<button type="submit" disabled>
-<svg className="spinner" viewBox="0 0 50 50">
-	<circle
-		className="path"
-		cx="25"
-		cy="25"
-		r="20"
-		fill="none"
-		strokeWidth="1"
-	></circle>
-</svg>
-</button>
-
-
-<button
-                type="submit"
-                disabled={phone.length === 18 ? false : true}
-              >
-                Войти
-              </button>
-*/
-

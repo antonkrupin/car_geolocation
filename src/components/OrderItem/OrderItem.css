@@ -48,10 +48,15 @@
   margin: 0;
 }
 
+.registered {
+	color:rgba(39, 174, 96, 1);
+}
+
 .freightOrders__content .orderItem_button {
 	width: 44px;
 	margin-right: 16px;
 	border: none;
+	cursor: pointer;
 }
 
 .freightOrders__content .orderItem_button img {

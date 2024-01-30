@@ -11,6 +11,7 @@
 	border-radius: 24px;
 	border: none;
 	cursor: pointer;
+	margin-top: 12px;
 }
 
 .filledButton:disabled {

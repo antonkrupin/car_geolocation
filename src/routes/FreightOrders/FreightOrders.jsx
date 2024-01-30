@@ -39,6 +39,9 @@ const FreightOrders = () => {
               orders[1].map((order, index) => (
                 <OrderItem key={index} order={order} />
               ))}
+						{orders.length === 0 && (
+							<h4>Заказов нет</h4>
+						)}
           </div>
           <h6>
             Вы можете добавить приложение на экран своего смартфона нажав кнопку

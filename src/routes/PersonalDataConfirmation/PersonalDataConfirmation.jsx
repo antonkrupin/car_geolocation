@@ -14,7 +14,7 @@ const TEST_ORDERS = {
     [
       {
         'id': '410045634',
-        'status': 'Не зарегистрирован',
+        'status': 0,
         'city': 'Череповец',
 				'address': 'г. Череповец, улица 8-го марта, дом 54',
 				'storage': '324-Череповец-М',
@@ -25,24 +25,24 @@ const TEST_ORDERS = {
 			},
       {
         'id': '410045635',
-        'status': 'Не зарегистрирован',
+        'status': 0,
         'city': 'Череповец',
 				'address': 'г. Череповец, улица 8-го марта, дом 54',
 				'storage': '324-Череповец-М',
 				'enterDate': '12.02.24',
 				'loadingSlot': '11:00-16:00',
-				'carNumber': 'a202aa',
+				'carNumber': 'м302ох',
 				'priority': '1',
 			},
 			{
         'id': '410045636',
-        'status': 'Зарегистрирован',
+        'status': 1,
         'city': 'Череповец',
 				'address': 'г. Череповец, улица 8-го марта, дом 54',
 				'storage': '324-Череповец-М',
 				'enterDate': '12.02.24',
 				'loadingSlot': '11:00-16:00',
-				'carNumber': 'a202aa',
+				'carNumber': 'м534ха',
 				'priority': '1',
 			}
     ]
@@ -58,19 +58,22 @@ const TEST_ORDERS = {
 };
 
 const PersonalDataConfirmation = () => {
-  const phoneId = useParams().phone;
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const phoneId = useParams().phone;
   const orders = TEST_ORDERS[phoneId];
-  
+	  
   dispatch(setOrders(orders));
+
   const buttonClickHandler = () => {
     navigate(`/freightOrders/${phoneId}`);
   }
 
   return (
     <div className="personalDataConfirmation">
-      <div className="personalDataConfirmation__content">
+			{orders && (
+				<div className="personalDataConfirmation__content">
         <h3>Здравствуйте, {orders[0][0]}</h3>
         <h3>Подтвердите свои данные</h3>
         <div className="personalData">
@@ -90,12 +93,12 @@ const PersonalDataConfirmation = () => {
         <h6>Если данные некорректные свяжитесь пожалуйста с диспетчером</h6>
 				<FilledButton onClick={buttonClickHandler} buttonText="Подтвердить" />
       </div>
+			)}
+      {!orders && (
+				<h1>Ничего не найдено</h1>
+			)}
     </div>
   )
 };
 
 export default PersonalDataConfirmation;
-
-/*
-<button onClick={buttonClickHandler}>Подтвердить</button>
-*/

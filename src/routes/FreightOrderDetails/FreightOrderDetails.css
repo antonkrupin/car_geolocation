@@ -1,0 +1,125 @@
+.freightOrderDetails {
+	width: var(--main-width);
+	height: var(--main-height);
+}
+
+.freightOrderDetails__content {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.freightOrderDetails__content h1 {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 31px;
+	letter-spacing: -1px;
+  color: var(--main-text-color);
+  margin: 8px 0 15px 0;
+}
+
+.freightOrderDetails__content h1 > span {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 31px;
+	letter-spacing: 0;
+  color: var(--main-text-color);
+}
+
+.freightOrderDetails__content > span {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: -1px;
+  color: var(--blue-color);
+	border-radius: 24px;
+	border: 1px solid rgba(188, 188, 188, 1);
+  margin: 8px 0 10px 0;
+	padding: 5px 10px;
+}
+
+.freightOrderDetails__content .registered {
+	color: rgba(255, 255, 255, 1);
+	background-color: var(--button-fill-color);
+	letter-spacing: 0px;
+	border: none;
+}
+
+.freightOrderDetails__div {
+	display: grid;
+	margin-top: 20px;
+	margin-bottom: 12px;
+	grid-template-columns: repeat(2, 50%);
+  }
+
+.freightOrderDetails__div > div {
+	display: flex;
+	flex-direction: column;
+	height: 66px;
+	background-color: rgba(244, 244, 244, 1);
+	margin: 1px;
+	padding: 12px 16px 16px 16px;
+}
+
+.freightOrderDetails__div .address {
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+.freightOrderDetails__div .storage {
+	grid-row-start: 2;
+	grid-row-end: 4;
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+
+.freightOrderDetails__div > div h5 {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 17px;
+	letter-spacing: 0px;
+  color: var(--grey-color);
+	margin: 0 0 3px 0;
+}
+
+.freightOrderDetails__div > div h6 {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 17px;
+	letter-spacing: 0px;
+  color: var(--blue-color);
+	margin: 0 0 0px 0;
+}
+
+.freightOrderDetails__content form {
+	display: flex;
+	flex-direction: column;
+}
+
+.freightOrderDetails__content form > div {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.freightOrderDetails__content form input {
+	width: 20px;
+	height: 20px;
+	margin-right: 12px;
+}
+
+.freightOrderDetails__content form label {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 21px;
+	letter-spacing: 0px;
+  color: rgba(188, 188, 188, 1);
+}
+
+hr {
+	margin-bottom: 20px;
+}

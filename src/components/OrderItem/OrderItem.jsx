@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router';
 
+import cn from 'classnames';
+
 import truckIcon from '../../images/icons/truck.png';
 import detailButton from '../../images/icons/detailButton.png';
 
@@ -15,13 +17,18 @@ const OrderItem = (props) => {
 	const buttonHandler = () => {
 		navigate(`/details/${order.id}`, {state: { "prev": location.pathname }});
 	};
+
+	const orderStatusClassName = cn('orderItem_status', {
+		'registered': order.status,
+	});
+
 	return (
 		<div className="orderItem">
 			<img src={truckIcon} alt="Иконка грузовика"/>
 			<div>
 				<h3 className="orderItem_id">{order.id}</h3>
 				<h4 className="orderItem_city">{order.city}</h4>
-				<h5 className="orderItem_status">{order.status}</h5>
+				<h5 className={orderStatusClassName}>{order.status ? 'Зарегистрирован' : 'Не зарегистрирован'}</h5>
 			</div>
 			<button
 				onClick={buttonHandler}

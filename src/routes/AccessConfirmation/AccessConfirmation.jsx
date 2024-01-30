@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-
 import { useForm } from "react-hook-form";
 
 import { setCode } from "../../slices/mainReducer";
@@ -11,13 +10,15 @@ import BackwardButton from "../../components/BackwardButton/BackwardButton";
 
 import "./AccessConfirmation.css";
 
-const AccessConfirmation = () => {
-  const TEST_COUNTER_VALUE = 20;
-	const TEST_PHONE_CODE = '3456';
-  const phone = useSelector(fetchPhone);
+const TEST_COUNTER_VALUE = 20;
+const TEST_PHONE_CODE = '3456';
 
-	const dispatch = useDispatch();
+const AccessConfirmation = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+	const location = useLocation();
+
+	const phone = useSelector(fetchPhone);
 
   const [counter, setCounter] = useState(TEST_COUNTER_VALUE);
   const [isCounting, setIsCounting] = useState(false);
@@ -32,7 +33,6 @@ const AccessConfirmation = () => {
   const resendAccessCode = () => {
     setIsCounting(true);
     setCounter(TEST_COUNTER_VALUE);
-    console.log("code is send");
   };
 
   const hidePhoneNumbers = (phone) => {
@@ -61,10 +61,6 @@ const AccessConfirmation = () => {
     timer();
     //firstInputRef.current.focus();
   }, [isCounting]);
-
-  const backButtonHandler = () => {
-    navigate("/login");
-  };
 	
 	const onSubmit = (data) => {
 		const code = Object.values(watch()).join('');
@@ -115,15 +111,4 @@ const AccessConfirmation = () => {
 
 export default AccessConfirmation;
 
-/*
-
-<div
-          onClick={backButtonHandler}
-          className="accessConfirmation__backButton"
-        >
-          <img src="images/icons/back.png" alt="Назад" />
-          <h4>Назад</h4>
-        </div>
-
-*/
 
