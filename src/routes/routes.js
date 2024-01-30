@@ -8,5 +8,4 @@ export default {
 	freightOrders: () => '/freightOrders/:phone',
 	freightOrderDetails: () => '/details/:id',
 	freightOrederRegistration: () => '/registration/:id',
-	earlyOrderSign: () => '/earlyOrder/:id',
 }
