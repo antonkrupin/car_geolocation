@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
+import cn from 'classnames';
 
 import { fetchOrders } from "../../slices/selectors";
 
@@ -27,6 +28,10 @@ const FreightOrders = () => {
     if (clickedElement.previousElementSibling) clickedElement.previousElementSibling.classList.remove('active');
     if (clickedElement.nextElementSibling) clickedElement.nextElementSibling.classList.remove('active');
   };
+
+  const freigthOrdersMenuClassName = cn('freigthOrdersMenu__content', {
+    'marginTop': activeLink === 'profile',
+  })
 
   return (
     <>
@@ -69,7 +74,7 @@ const FreightOrders = () => {
               </div>
           </div>
         )}
-        <div onClick={changeActiveLink} className="freigthOrdersMenu__content">
+        <div onClick={changeActiveLink} className={freigthOrdersMenuClassName}>
           <div className="menuItem active" data-name="orders">
             <img src={activeLink === 'orders' ? freightCar : freightCarGrey} alt="Заказы" />
             <h4>Заказы</h4>
