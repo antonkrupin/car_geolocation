@@ -1,17 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
+import cn from 'classnames';
 
-import { setPhone } from "../../slices/mainReducer";
+import { setPhone, setOrders } from "../../slices/mainReducer";
 
 import FilledButton from "../../components/FilledButton/FilledButton";
+import ErrorBlock from '../../components/ErrorBlock/ErrorBlock';
 
 import "./LoginPage.css";
+
+import { TEST_ORDERS } from "../../assets/TEST_CONST";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const phoneInputRef = useRef();
 
   const [phone, setPhoneNumber] = useState("+7");
@@ -30,18 +33,24 @@ const LoginPage = () => {
       .split("")
       .filter((el) => !isNaN(Number(el)))
       .join("");
-    dispatch(setPhone(formattedPhone));
-    navigate("/accessConfirmation", { state: { prev: [location.pathname] } });
+    if (TEST_ORDERS[formattedPhone]) {
+      dispatch(setOrders(TEST_ORDERS[formattedPhone]));
+      dispatch(setPhone(formattedPhone));
+      navigate("/accessConfirmation");
+    } else {
+      setError(true);
+    }
   };
 
   const formHandler = (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(redirectTest, 2000);
+    setTimeout(redirectTest, 1000);
   };
 
   const phoneInputHandler = (e) => {
     const value = e.target.value;
+    setError();
     setPhoneNumber((prev) => {
       if (prev === "+7" && prev.length > e.target.value.length) {
         return "+7";
@@ -87,14 +96,21 @@ const LoginPage = () => {
     });
   };
 
+  const phoneInputClassName = cn('phoneInput', {
+    'errorInput': error,
+  })
+
   return (
     <>
       <div className="loginPage">
+          {error && (
+            <ErrorBlock show={error} errorTitle="По указанному номеру заказы не найдены"/>
+          )}
         <div className="loginPage__content">
           <h3>Введите номер телефона для регистрации</h3>
           <div className="loginPage__error">{error}</div>
           <form onSubmit={formHandler}>
-            <div>
+            <div className={phoneInputClassName}>
               <input
                 onChange={phoneInputHandler}
                 maxLength="18"

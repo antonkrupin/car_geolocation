@@ -49,14 +49,19 @@
 	color: var(--grey-color);
 }
 
-.loginPage__content form div {
+.phoneInput {
 	width: 100%;
 	height: 44px;
+	background-image: url('../../images/icons/phoneIcon.png');
+	background-repeat: no-repeat;
+	background-position: top 9px left 12px;
 	border-radius: 24px;
 	border: 1px solid var(--blue-color);
 	margin-bottom: 96px;
 	padding: 0;
-	background-image: url('../../../public/images/icons/phone.png');
-	background-repeat: no-repeat;
-	background-position: top 9px left 12px;
+}
+
+.errorInput {
+	background-image: url('../../images/icons/phoneIcon_error.png');
+	border: 1px solid var(--red-color);
 }
