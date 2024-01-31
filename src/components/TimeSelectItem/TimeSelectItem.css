@@ -1,0 +1,16 @@
+.timeItem {
+  font-family: 'GrtskPeta-Regular';
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 17px;
+	letter-spacing: 0px;
+  color: var(--main-text-color);
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+}
+
+.timeItem:hover {
+  background-color: rgba(216, 229, 248, 1);
+  cursor: pointer;
+}
