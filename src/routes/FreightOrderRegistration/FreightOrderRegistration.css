@@ -133,6 +133,10 @@
 	cursor: pointer;
 }
 
+.timeSelectError {
+	border: 1px solid var(--red-color);
+}
+
 .timeSelect img {
 	width: 32px;
 	height: 32px;

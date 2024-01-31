@@ -1,5 +1,5 @@
-import React from "react";
-import { useParams, useNavigate, useLocation } from "react-router";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
 import { fetchOrders } from "../../slices/selectors";
@@ -7,12 +7,14 @@ import { fetchOrders } from "../../slices/selectors";
 import BackwardButton from "../../components/BackwardButton/BackwardButton";
 import FilledButton from "../../components/FilledButton/FilledButton";
 import OutlinedButton from "../../components/OutlinedButton/OutlinedButton";
+import ErrorBlock from "../../components/ErrorBlock/ErrorBlock";
 
 import "./FreightOrderDetails.css";
 
 const FreightOrderDetails = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+
+  const [error, setError] = useState(false);
 
   const orders = useSelector(fetchOrders)[1];
   const id = useParams().id;
@@ -29,11 +31,24 @@ const FreightOrderDetails = () => {
   } = orders.filter((order) => order.id === id)[0];
 
   const orderRegistrationHandler = () => {
-    navigate(`/registration/${id}`, { state: { prev: location.pathname } });
+    const registeredOrders = orders.filter((order) => order.status === 1);
+    if (registeredOrders.length !== 0) {
+      setError(true);
+      setTimeout(() => {setError(false)}, 6000);
+    } else {
+      navigate(`/registration/${id}`);
+    }
   };
 
   return (
     <div className="freightOrderDetails">
+      {error && (
+        <ErrorBlock
+          show={error}
+          errorTitle="У Вас уже есть зарегистрированный заказ"
+          errorMessage="Завершите текущий заказ и попробуйте ещё раз"
+        />
+      )}
       <div className="freightOrderDetails__content">
         <BackwardButton />
         <h1>
