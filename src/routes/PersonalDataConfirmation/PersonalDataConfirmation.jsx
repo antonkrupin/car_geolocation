@@ -1,71 +1,18 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { setOrders } from '../../slices/mainReducer';
+import { fetchOrders } from '../../slices/selectors';
 
 import FilledButton from '../../components/FilledButton/FilledButton';
 
 import './PersonalDataConfirmation.css';
 
-const TEST_ORDERS = {
-  '89062087761': [
-    ['Крупин Антон Петрович', '6754443322'],
-    [
-      {
-        'id': '410045634',
-        'status': 0,
-        'city': 'Череповец',
-				'address': 'г. Череповец, улица 8-го марта, дом 54',
-				'storage': '324-Череповец-М',
-				'enterDate': '12.02.24',
-				'loadingSlot': '11:00-16:00',
-				'carNumber': 'a202aa',
-				'priority': '1',
-			},
-      {
-        'id': '410045635',
-        'status': 0,
-        'city': 'Череповец',
-				'address': 'г. Череповец, улица 8-го марта, дом 54',
-				'storage': '324-Череповец-М',
-				'enterDate': '12.02.24',
-				'loadingSlot': '11:00-16:00',
-				'carNumber': 'м302ох',
-				'priority': '1',
-			},
-			{
-        'id': '410045636',
-        'status': 1,
-        'city': 'Череповец',
-				'address': 'г. Череповец, улица 8-го марта, дом 54',
-				'storage': '324-Череповец-М',
-				'enterDate': '12.02.24',
-				'loadingSlot': '11:00-16:00',
-				'carNumber': 'м534ха',
-				'priority': '1',
-			}
-    ]
-  ],
-  '89114047953': [
-    ['Иванов Иван Иванович', '9034', '123098'],
-    [
-      ['420045634', 'Не зарегистрирован', 'Череповец'],
-      ['430045634', 'Зарегистрирован', 'Череповец'],
-      ['440045633', 'Зарегистрирован', 'Череповец'],
-    ]
-  ]
-};
-
 const PersonalDataConfirmation = () => {
-	const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const orders = useSelector(fetchOrders);
   const phoneId = useParams().phone;
-  const orders = TEST_ORDERS[phoneId];
 	  
-  dispatch(setOrders(orders));
-
   const buttonClickHandler = () => {
     navigate(`/freightOrders/${phoneId}`);
   }
