@@ -19,6 +19,10 @@
   margin-bottom: 32px;
 }
 
+.accessConfirmation__content > .marginTop {
+  margin-top: 100px;
+}
+
 .accessConfirmation__content form {
   display: flex;
   flex-direction: row;
