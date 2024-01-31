@@ -3,12 +3,11 @@ import React from 'react';
 import './TimeSelectItem.css';
 
 const TimeSelectItem = (props) => {
-  const { onClick, index, text} = props;
+  const { onClick, text} = props;
   return (
     <span
       onClick={onClick}
       className="timeItem"
-      key={index}
     >
       {text}
     </span>
