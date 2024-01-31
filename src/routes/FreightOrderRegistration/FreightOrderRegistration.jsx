@@ -9,19 +9,16 @@ import BackwardButton from "../../components/BackwardButton/BackwardButton";
 import TimeSelectItem from "../../components/TimeSelectItem/TimeSelectItem";
 import FilledButton from "../../components/FilledButton/FilledButton";
 import Spinner from "../../components/Spinner/Spinner";
+import ErrorBlock from "../../components/ErrorBlock/ErrorBlock";
 
 import calendarIcon from "../../images/icons/calendar-2.png";
+import calendarIconError from "../../images/icons/calendarError.png";
 import dropDownIcon from "../../images/icons/chevron-down.png";
+
 import "./FreightOrderRegistration.css";
 
-const TEST_TIME = [
-  "06:00-08:00",
-  "08:00-12:00",
-  "12:00-15:00",
-  "15:00-18:00",
-  "18:00-20:00",
-  "20:00-22:00",
-];
+import { TEST_TIME } from "../../assets/TEST_CONST";
+import { generateRandomNumber } from "../../assets/TEST_CONST";
 
 const FreightOrderRegistration = () => {
   const id = useParams().id;
@@ -31,18 +28,30 @@ const FreightOrderRegistration = () => {
   const [isTimeListHidden, setIsTimeListHidden] = useState(true);
   const [loadingSlot, setloadingSlot] = useState(TEST_TIME[0]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const timeSelectListClassName = cn("timeSelectList", "scrollable", {
     hidden: isTimeListHidden,
   });
 
+  const timeSelectClassName = cn("timeSelect", {
+    'timeSelectError': error,
+  });
+
   const timeSelectListHandler = () => {
+    setError(false);
     setIsTimeListHidden(!isTimeListHidden);
   };
 
   const timeSelectHandler = (e) => {
-    setloadingSlot(e.target.innerText);
-    setIsTimeListHidden(!isTimeListHidden);
+    if (e.target.innerText === "12:00-15:00") {
+      setError(true);
+      setIsTimeListHidden(!isTimeListHidden);
+    } else {
+      setError(false);
+      setloadingSlot(e.target.innerText);
+      setIsTimeListHidden(!isTimeListHidden);
+    }
   };
 
   const redirectTest = () => {
@@ -50,29 +59,51 @@ const FreightOrderRegistration = () => {
     navigate(-1);
   };
 
+  //пока нет разницы в ошибке регистрации и в ошибке выбора слота
   const formHandler = (e) => {
     e.preventDefault();
-    setLoading(true);
-    dispatch(changeOrder({ id: id, status: 1, loadingSlot: loadingSlot }));
-    setTimeout(redirectTest, 2000);
+    if (generateRandomNumber() < 0.5) {
+      setError(true);
+    } else {
+      setLoading(true);
+      setError(false);
+      dispatch(changeOrder({ id: id, status: 1, loadingSlot: loadingSlot }));
+      setTimeout(redirectTest, 2000);
+    }
   };
 
   return (
     <>
       {!loading && (
         <div className="freigthOrderRegistration">
+          {error && (
+            <ErrorBlock
+              show={error}
+              errorTitle="При регистрации произошла ошибка"
+              errorMessage="Выбранный слот уже занят"
+            />
+          )}
           <div className="freightOrderRegistration__content">
             <BackwardButton />
-            <h1>Регистрация заказа <span>{id}</span></h1>
+            <h1>
+              Регистрация заказа <span>{id}</span>
+            </h1>
             <h4>Для регистрации проверьте корректность слота погрузки</h4>
-            <div onClick={timeSelectListHandler} className="timeSelect">
-              <img src={calendarIcon} alt="Иконка календаря" />
+            <div onClick={timeSelectListHandler} className={timeSelectClassName}>
+              <img
+                src={error ? calendarIconError : calendarIcon}
+                alt="Иконка календаря"
+              />
               <h3>{loadingSlot}</h3>
               <img src={dropDownIcon} alt="Раскрыть список" />
             </div>
             <div className={timeSelectListClassName}>
               {TEST_TIME.map((time, index) => (
-                <TimeSelectItem onClick={timeSelectHandler} index={index} text={time} />
+                <TimeSelectItem
+                  key={index}
+                  onClick={timeSelectHandler}
+                  text={time}
+                />
               ))}
             </div>
             <form>
@@ -86,8 +117,8 @@ const FreightOrderRegistration = () => {
               </div>
             </form>
             <h5>
-              <span>*</span>Подтверждает вашу готовность заехать раньше, если такая
-              возможность будет
+              <span>*</span>Подтверждает вашу готовность заехать раньше, если
+              такая возможность будет
             </h5>
             <hr />
             <FilledButton
@@ -98,11 +129,11 @@ const FreightOrderRegistration = () => {
         </div>
       )}
       {loading && (
-				<div className="freigthOrderRegistration">
-					<h1>Регистрация заказа</h1>
-					<Spinner size="big" color="blue"/>
-				</div>
-			)}
+        <div className="freigthOrderRegistration">
+          <h1>Регистрация заказа</h1>
+          <Spinner size="big" color="blue" />
+        </div>
+      )}
     </>
   );
 };
