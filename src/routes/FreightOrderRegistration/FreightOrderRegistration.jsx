@@ -6,6 +6,7 @@ import cn from "classnames";
 import { changeOrder } from "../../slices/mainReducer";
 
 import BackwardButton from "../../components/BackwardButton/BackwardButton";
+import TimeSelectItem from "../../components/TimeSelectItem/TimeSelectItem";
 import FilledButton from "../../components/FilledButton/FilledButton";
 import Spinner from "../../components/Spinner/Spinner";
 
@@ -14,18 +15,6 @@ import dropDownIcon from "../../images/icons/chevron-down.png";
 import "./FreightOrderRegistration.css";
 
 const TEST_TIME = [
-  "06:00-08:00",
-  "08:00-12:00",
-  "12:00-15:00",
-  "15:00-18:00",
-  "18:00-20:00",
-  "20:00-22:00",
-  "06:00-08:00",
-  "08:00-12:00",
-  "12:00-15:00",
-  "15:00-18:00",
-  "18:00-20:00",
-  "20:00-22:00",
   "06:00-08:00",
   "08:00-12:00",
   "12:00-15:00",
@@ -53,6 +42,7 @@ const FreightOrderRegistration = () => {
 
   const timeSelectHandler = (e) => {
     setloadingSlot(e.target.innerText);
+    setIsTimeListHidden(!isTimeListHidden);
   };
 
   const redirectTest = () => {
@@ -73,7 +63,7 @@ const FreightOrderRegistration = () => {
         <div className="freigthOrderRegistration">
           <div className="freightOrderRegistration__content">
             <BackwardButton />
-            <h1>Регистрация заказа {id}</h1>
+            <h1>Регистрация заказа <span>{id}</span></h1>
             <h4>Для регистрации проверьте корректность слота погрузки</h4>
             <div onClick={timeSelectListHandler} className="timeSelect">
               <img src={calendarIcon} alt="Иконка календаря" />
@@ -82,29 +72,23 @@ const FreightOrderRegistration = () => {
             </div>
             <div className={timeSelectListClassName}>
               {TEST_TIME.map((time, index) => (
-                <span
-                  onClick={timeSelectHandler}
-                  className="timeItem"
-                  key={index}
-                >
-                  {time}
-                </span>
+                <TimeSelectItem onClick={timeSelectHandler} index={index} text={time} />
               ))}
             </div>
-            <h5>
-              Подтверждает вашу готовность заехать раньше, если такая
-              возможность будет
-            </h5>
             <form>
               <div>
-                <input id="earlyChecOut" type="checkbox" />
+                <input id="earlyChecOut" type="checkbox" disabled />
                 <label htmlFor="earlyChecOut">Готовность раннего въезда</label>
               </div>
               <div>
-                <input id="withOutQueue" type="checkbox" />
+                <input id="withOutQueue" type="checkbox" disabled />
                 <label htmlFor="withOutQueue">Без очереди</label>
               </div>
             </form>
+            <h5>
+              <span>*</span>Подтверждает вашу готовность заехать раньше, если такая
+              возможность будет
+            </h5>
             <hr />
             <FilledButton
               onClick={formHandler}
@@ -115,7 +99,7 @@ const FreightOrderRegistration = () => {
       )}
       {loading && (
 				<div className="freigthOrderRegistration">
-					<h1>Регистрация</h1>
+					<h1>Регистрация заказа</h1>
 					<Spinner size="big" color="blue"/>
 				</div>
 			)}
