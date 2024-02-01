@@ -47,7 +47,8 @@ const FreightOrderRegistration = () => {
 
   const timeSelectHandler = (e) => {
     if (e.target.innerText === "12:00-15:00") {
-      setError(true);
+      setError('bookedLoadingSlot');
+			setloadingSlot(e.target.innerText);
       setIsTimeListHidden(!isTimeListHidden);
     } else {
       setError(false);
@@ -61,11 +62,10 @@ const FreightOrderRegistration = () => {
     navigate(-1);
   };
 
-  //пока нет разницы в ошибке регистрации и в ошибке выбора слота
   const formHandler = (e) => {
     e.preventDefault();
     if (generateRandomNumber() < 0.5) {
-      setError(true);
+      setError('registrationError');
     } else {
       setLoading(true);
       setError(false);
@@ -74,10 +74,6 @@ const FreightOrderRegistration = () => {
     }
   };
 
-	navigator.geolocation.getCurrentPosition((position) => {
-		console.log(position);
-	})
-
   return (
     <>
       {!loading && (
@@ -85,8 +81,7 @@ const FreightOrderRegistration = () => {
           {error && (
             <ErrorBlock
               show={error}
-              errorTitle="При регистрации произошла ошибка"
-              errorMessage="Выбранный слот уже занят"
+              error={error}
             />
           )}
           <div className="freightOrderRegistration__content">
