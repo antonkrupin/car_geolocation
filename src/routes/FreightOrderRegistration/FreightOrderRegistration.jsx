@@ -18,7 +18,9 @@ import dropDownIcon from "../../images/icons/chevron-down.png";
 import "./FreightOrderRegistration.css";
 
 import { TEST_TIME } from "../../assets/TEST_CONST";
+import { TEST_CAR_COORDS } from "../../assets/TEST_CONST";
 import { generateRandomNumber } from "../../assets/TEST_CONST";
+import CityMap from "../../components/CItyMap/CityMap";
 
 const FreightOrderRegistration = () => {
   const id = useParams().id;
@@ -71,6 +73,10 @@ const FreightOrderRegistration = () => {
       setTimeout(redirectTest, 2000);
     }
   };
+
+	navigator.geolocation.getCurrentPosition((position) => {
+		console.log(position);
+	})
 
   return (
     <>
@@ -126,6 +132,7 @@ const FreightOrderRegistration = () => {
               buttonText="Подтвердить время погрузки"
             />
           </div>
+					<CityMap carCoords={TEST_CAR_COORDS[3]}/>
         </div>
       )}
       {loading && (
