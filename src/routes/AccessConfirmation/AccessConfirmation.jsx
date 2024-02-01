@@ -69,7 +69,7 @@ const AccessConfirmation = () => {
     if (Number(code) === Number(TEST_PHONE_CODE)) {
       navigate(`/personalDataConfirmation/${phone}`);
     } else {
-      setError(true);
+      setError('wrongSmsCode');
       setTimeout(() => {
         setError(false);
       }, 6000);
@@ -90,8 +90,7 @@ const AccessConfirmation = () => {
           {error && (
             <ErrorBlock
               show={error}
-              errorTitle="Неправильный код"
-              errorMessage="Попробуйте еще раз или отправьте код повторно"
+							error={error}
             />
           )}
           <div className="accessConfirmation__content">
