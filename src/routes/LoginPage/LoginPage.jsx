@@ -38,7 +38,7 @@ const LoginPage = () => {
       dispatch(setPhone(formattedPhone));
       navigate("/accessConfirmation");
     } else {
-      setError(true);
+      setError('ordersNotFound');
     }
   };
 
@@ -50,14 +50,14 @@ const LoginPage = () => {
 
   const phoneInputHandler = (e) => {
     const value = e.target.value;
-    setError();
+    setError(false);
     setPhoneNumber((prev) => {
       if (prev === "+7" && prev.length > e.target.value.length) {
         return "+7";
       }
       if (prev.length < e.target.value.length) {
         if (!isNaN(e.target.value.at(-1))) {
-          setError();
+          setError(false);
           switch (phone.length) {
             case 2: {
               let lastChar = value.at(-1);
@@ -104,7 +104,7 @@ const LoginPage = () => {
     <>
       <div className="loginPage">
           {error && (
-            <ErrorBlock show={error} errorTitle="По указанному номеру заказы не найдены"/>
+            <ErrorBlock show={error} error={error} />
           )}
         <div className="loginPage__content">
           <h3>Введите номер телефона для регистрации</h3>
