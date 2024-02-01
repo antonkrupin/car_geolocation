@@ -1,17 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { YMaps, Map, Placemark, Circle, ZoomControl } from '@pbe/react-yandex-maps';
 
-import { fetchCoords } from '../../slices/selectors';
-
-import { TEST_KPP_COORDS, getDistanceFromLatLonInKm } from '../../assets/TEST_CONST';
+import { TEST_KPP_COORDS } from '../../assets/TEST_CONST';
 
 
 const CityMap = (props) => {
 	const { carCoords } = props;
   //const coords = useSelector(fetchCoords);
-	const result = getDistanceFromLatLonInKm(TEST_KPP_COORDS[0], TEST_KPP_COORDS[1], carCoords[0], carCoords[1]);
-	console.log(result);
   return (
     <YMaps>
       <div>
