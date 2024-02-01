@@ -8,6 +8,9 @@ export const TEST_CAR_COORDS = [
   [59.144393, 37.842666],
 ];
 
+//тестовое расстояние до КПП указывается в километрах
+export const TEST_REGISTRATION_DISTANCE = 5;
+
 // тестовые фрахтовые заказы
 export const TEST_ORDERS = {
   89062087761: [
