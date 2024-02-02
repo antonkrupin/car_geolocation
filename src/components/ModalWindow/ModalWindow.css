@@ -1,12 +1,83 @@
-.ReactModal__Overlay {
-	opacity: 0;
-	transition: opacity 2000ms ease-in-out;
+.modalWindowOverlay {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: var(--main-width);
+	height: var(--main-height);
+	position: absolute;
+	background-color:rgba(0, 47, 108, 0.4);
 }
 
-.ReactModal__Overlay--after-open{
-	opacity: 1;
+.closed {
+	display: none;
 }
 
-.ReactModal__Overlay--before-close{
-	opacity: 0;
+.modalWindow {
+	position: relative;
+	background-color: white;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.modalWindow > h3 {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+	letter-spacing: -2%;
+	color: var(--main-text-color);
+	margin-top: 26px;
+	margin-bottom: 0px;
+	margin-left: 24px;
+}
+
+.modalWindow > h4 {
+	font-family: 'GrtskPeta-Regular';
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: -2%;
+	color: var(--main-text-color);
+	margin-top: 12px;
+	margin-bottom: 0px;
+	margin-left: 24px;
+}
+
+.closeModalButton {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+}
+
+.modalWindow > div {
+	display: flex;
+	justify-content: end;
+}
+
+.confirmCancelButton {
+	width: 198px;
+	height: 44px;
+	font-family: 'GrtskPeta-Regular';
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: -2%;
+	color: var(--white-color);
+	background-color: var(--button-fill-color);
+	border-radius: 24px;
+	border: none;
+	cursor: pointer;
+	margin-top: 35px;
+	margin-right: 20px;
+	margin-bottom: 22px;
+}
+
+.confirmCancelButton:disabled {
+	color: var(--grey-color);
+	background-color: rgba(244, 244, 244, 1);
+	cursor: auto;
 }

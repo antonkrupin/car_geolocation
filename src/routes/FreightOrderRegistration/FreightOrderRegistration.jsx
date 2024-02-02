@@ -74,8 +74,8 @@ const FreightOrderRegistration = () => {
 		const distance = getDistanceFromLatLonInKm(
 			TEST_KPP_COORDS[0],
 			TEST_KPP_COORDS[1],
-			TEST_CAR_COORDS[0][0],
-			TEST_CAR_COORDS[0][1]
+			TEST_CAR_COORDS[1][0],
+			TEST_CAR_COORDS[1][1]
 		);
 		if (TEST_REGISTRATION_DISTANCE < distance) {
 			setError('outOfRegistrationZone');

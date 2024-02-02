@@ -7,6 +7,8 @@ const initialState = {
 	phone: '',
 	orders: [],
 	code: '',
+	isModalOpen: false,
+	isLoading: false,
 }
 
 const slice = createSlice({
@@ -21,10 +23,12 @@ const slice = createSlice({
 		},
 		changeOrder: (state, action) => {
 			const { id, status, loadingSlot } = action.payload;
+			console.log(action.payload);
 			state.orders[1].forEach((order) => {
 				if (order.id === id) {
-					order.status = status;
-					order.loadingSlot = loadingSlot
+					console.log(order);
+					order.status = status || order.status;
+					order.loadingSlot = loadingSlot || order.loadingSlot;
 				}
 			})
 		},
@@ -39,6 +43,12 @@ const slice = createSlice({
 		},
 		setError: (state, action) => {
 			state.error = action.payload;
+		},
+		setModalOpen: (state, action) => {
+			state.isModalOpen = !state.isModalOpen;
+		},
+		setIsLoading: (state, action) => {
+			state.isLoading = !state.isLoading;
 		}
 	}
 });
@@ -51,6 +61,8 @@ export const {
 	setCode,
 	setOrders,
 	setError,
+	setModalOpen,
+	setIsLoading
 } = slice.actions;
 
 export default slice.reducer;

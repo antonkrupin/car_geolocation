@@ -13,6 +13,10 @@
 	cursor: pointer;
 }
 
+.outlinedButton:last-of-type {
+	margin-top: 12px;
+}
+
 .outlinedButton:disabled {
 	color: var(--grey-color);
 	background-color: rgba(244, 244, 244, 1);
