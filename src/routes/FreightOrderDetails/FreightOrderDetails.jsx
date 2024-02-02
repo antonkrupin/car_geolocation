@@ -39,18 +39,7 @@ const FreightOrderDetails = () => {
     priority,
   } = orders.filter((order) => order.id === id)[0];
 
-  const orderRegistrationHandler = () => {
-		const distance = getDistanceFromLatLonInKm(
-			TEST_KPP_COORDS[0],
-			TEST_KPP_COORDS[1],
-			TEST_CAR_COORDS[0][0],
-			TEST_CAR_COORDS[0][1]
-		);
-		 //доделать
-		if (TEST_REGISTRATION_DISTANCE < distance) {
-			setError('outOfRegistrationZone');
-		} 
-		
+  const orderRegistrationHandler = () => {		
     const registeredOrders = orders.filter((order) => order.status === 1);
     if (registeredOrders.length !== 0) {
       setError('haveRegesteredOrder');
@@ -63,7 +52,22 @@ const FreightOrderDetails = () => {
   };
 
 	const orderRegistrationCancelHandler = () => {
-		setIsModalOpen(true);
+		//TEST_CAR_COORDS[0] - не в радиусе
+		//TEST_CAR_COORDS[1] - в радиусе
+		//TEST_CAR_COORDS[2] - не в радиусе, но очень близко
+		//TEST_CAR_COORDS[3] - в радиусе
+		const distance = getDistanceFromLatLonInKm(
+			TEST_KPP_COORDS[0],
+			TEST_KPP_COORDS[1],
+			TEST_CAR_COORDS[1][0],
+			TEST_CAR_COORDS[1][1]
+		);
+		if (TEST_REGISTRATION_DISTANCE < distance) {
+			setError('outOfRegistrationCancelingZone');
+			setTimeout(() => {setError(false)}, 6000);
+		} else {
+			setIsModalOpen(true);
+		}
 	};
 
   return (
