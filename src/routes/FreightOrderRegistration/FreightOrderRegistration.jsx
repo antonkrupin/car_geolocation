@@ -17,10 +17,13 @@ import dropDownIcon from "../../images/icons/chevron-down.png";
 
 import "./FreightOrderRegistration.css";
 
-import { TEST_TIME } from "../../assets/TEST_CONST";
-import { TEST_CAR_COORDS } from "../../assets/TEST_CONST";
-import { generateRandomNumber } from "../../assets/TEST_CONST";
-import CityMap from "../../components/CItyMap/CityMap";
+import {
+	TEST_TIME,
+  TEST_KPP_COORDS,
+  TEST_CAR_COORDS,
+  TEST_REGISTRATION_DISTANCE,
+  getDistanceFromLatLonInKm,
+} from "../../assets/TEST_CONST";
 
 const FreightOrderRegistration = () => {
   const id = useParams().id;
@@ -37,7 +40,7 @@ const FreightOrderRegistration = () => {
   });
 
   const timeSelectClassName = cn("timeSelect", {
-    'timeSelectError': error,
+    'timeSelectError': error === 'bookedLoadingSlot',
   });
 
   const timeSelectListHandler = () => {
@@ -63,15 +66,26 @@ const FreightOrderRegistration = () => {
   };
 
   const formHandler = (e) => {
-    e.preventDefault();
-    if (generateRandomNumber() < 0.5) {
-      setError('registrationError');
-    } else {
-      setLoading(true);
-      setError(false);
-      dispatch(changeOrder({ id: id, status: 1, loadingSlot: loadingSlot }));
-      setTimeout(redirectTest, 2000);
-    }
+		e.preventDefault();
+		//TEST_CAR_COORDS[0] - не в радиусе
+		//TEST_CAR_COORDS[1] - в радиусе
+		//TEST_CAR_COORDS[2] - не в радиусе, но очень близко
+		//TEST_CAR_COORDS[3] - в радиусе
+		const distance = getDistanceFromLatLonInKm(
+			TEST_KPP_COORDS[0],
+			TEST_KPP_COORDS[1],
+			TEST_CAR_COORDS[0][0],
+			TEST_CAR_COORDS[0][1]
+		);
+		if (TEST_REGISTRATION_DISTANCE < distance) {
+			setError('outOfRegistrationZone');
+			setTimeout(() => {setError(false)}, 6000);
+		} else {
+			setLoading(true);
+			setError(false);
+			dispatch(changeOrder({ id: id, status: 1, loadingSlot: loadingSlot }));
+			setTimeout(redirectTest, 2000);
+		}
   };
 
   return (
@@ -92,7 +106,7 @@ const FreightOrderRegistration = () => {
             <h4>Для регистрации проверьте корректность слота погрузки</h4>
             <div onClick={timeSelectListHandler} className={timeSelectClassName}>
               <img
-                src={error ? calendarIconError : calendarIcon}
+                src={error === 'bookedLoadingSlot' ? calendarIconError : calendarIcon}
                 alt="Иконка календаря"
               />
               <h3>{loadingSlot}</h3>
@@ -127,7 +141,6 @@ const FreightOrderRegistration = () => {
               buttonText="Подтвердить время погрузки"
             />
           </div>
-					<CityMap carCoords={TEST_CAR_COORDS[3]}/>
         </div>
       )}
       {loading && (
