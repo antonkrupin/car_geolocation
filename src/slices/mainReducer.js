@@ -23,11 +23,9 @@ const slice = createSlice({
 		},
 		changeOrder: (state, action) => {
 			const { id, status, loadingSlot } = action.payload;
-			console.log(action.payload);
 			state.orders[1].forEach((order) => {
 				if (order.id === id) {
-					console.log(order);
-					order.status = status || order.status;
+					order.status = status;
 					order.loadingSlot = loadingSlot || order.loadingSlot;
 				}
 			})
