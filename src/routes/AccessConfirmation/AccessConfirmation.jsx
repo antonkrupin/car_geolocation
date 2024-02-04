@@ -3,8 +3,8 @@ import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
-import { setCode } from "../../slices/mainReducer";
-import { fetchPhone } from "../../slices/selectors";
+import { setCode, setIsLoading, setError } from "../../slices/mainReducer";
+import { fetchPhone, fetchIsLoading, fetchError } from "../../slices/selectors";
 
 import BackwardButton from "../../components/BackwardButton/BackwardButton";
 import Spinner from "../../components/Spinner/Spinner";
@@ -22,8 +22,9 @@ const AccessConfirmation = () => {
 
   const [counter, setCounter] = useState(TEST_COUNTER_VALUE);
   const [isCounting, setIsCounting] = useState(false);
-  const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+
+  const isLoading = useSelector(fetchIsLoading);
+  const error = useSelector(fetchError);
 
   const {
     register,
@@ -65,20 +66,20 @@ const AccessConfirmation = () => {
   }, [isCounting]);
 
   const redirectTest = (code) => {
-    setLoading(false);
+    dispatch(setIsLoading(false));
     if (Number(code) === Number(TEST_PHONE_CODE)) {
       navigate(`/personalDataConfirmation/${phone}`);
     } else {
-      setError('wrongSmsCode');
+      dispatch(setError("wrongSmsCode"));
       setTimeout(() => {
-        setError(false);
+        dispatch(setError());
       }, 6000);
     }
   };
 
   const onSubmit = (data) => {
     const code = Object.values(watch()).join("");
-    setLoading(true);
+    dispatch(setIsLoading(true));
     dispatch(setCode(code));
     setTimeout(() => redirectTest(code), 1000);
   };
@@ -87,12 +88,7 @@ const AccessConfirmation = () => {
     <>
       {!isLoading && (
         <div className="accessConfirmation">
-          {error && (
-            <ErrorBlock
-              show={error}
-							error={error}
-            />
-          )}
+          {error && <ErrorBlock show={error} error={error} />}
           <div className="accessConfirmation__content">
             <BackwardButton />
             <h4>Введите код из SMS-сообщения</h4>
