@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import cn from 'classnames';
 
@@ -12,10 +12,9 @@ const OrderItem = (props) => {
 	const { order } = props;
 	
 	const navigate = useNavigate();
-	const location = useLocation();
 	
 	const buttonHandler = () => {
-		navigate(`/details/${order.id}`, {state: { "prev": location.pathname }});
+		navigate(`/details/${order.id}`);
 	};
 
 	const orderStatusClassName = cn('orderItem_status', {
