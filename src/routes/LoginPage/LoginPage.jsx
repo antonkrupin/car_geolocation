@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import cn from 'classnames';
 
-import { setPhone, setOrders } from "../../slices/mainReducer";
+import { setPhone, setOrders, setIsLoading, setError } from "../../slices/mainReducer";
+import { fetchIsLoading, fetchError } from "../../slices/selectors";
 
 import FilledButton from "../../components/FilledButton/FilledButton";
 import ErrorBlock from '../../components/ErrorBlock/ErrorBlock';
@@ -18,15 +19,15 @@ const LoginPage = () => {
   const phoneInputRef = useRef();
 
   const [phone, setPhoneNumber] = useState("+7");
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const isLoading = useSelector(fetchIsLoading);
+  const error = useSelector(fetchError);
 
   useEffect(() => {
     phoneInputRef.current.focus();
   });
 
   const redirectTest = () => {
-    setLoading(false);
+    dispatch(setIsLoading(false));
     const formattedPhone = phone
       .replace("+7", "8")
       .replaceAll(" ", "")
@@ -38,26 +39,26 @@ const LoginPage = () => {
       dispatch(setPhone(formattedPhone));
       navigate("/accessConfirmation");
     } else {
-      setError('ordersNotFound');
+      dispatch(setError('ordersNotFound'));
     }
   };
 
   const formHandler = (e) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch(setIsLoading(true));
     setTimeout(redirectTest, 1000);
   };
 
   const phoneInputHandler = (e) => {
     const value = e.target.value;
-    setError(false);
+    dispatch(setError());
     setPhoneNumber((prev) => {
       if (prev === "+7" && prev.length > e.target.value.length) {
         return "+7";
       }
       if (prev.length < e.target.value.length) {
         if (!isNaN(e.target.value.at(-1))) {
-          setError(false);
+          dispatch(setError());
           switch (phone.length) {
             case 2: {
               let lastChar = value.at(-1);
@@ -87,7 +88,7 @@ const LoginPage = () => {
           }
         } else {
           e.target.value = value.slice(0, value.length - 1);
-          setError("Вводить только цифры");
+          dispatch(setError("Вводить только цифры"));
           return prev;
         }
       } else {
@@ -121,8 +122,8 @@ const LoginPage = () => {
                 required
               />
             </div>
-            {loading && <FilledButton isSpinner disabled />}
-            {!loading && (
+            {isLoading && <FilledButton isSpinner disabled />}
+            {!isLoading && (
               <FilledButton
                 buttonText="Войти"
                 disabled={phone.length === 18 ? false : true}
