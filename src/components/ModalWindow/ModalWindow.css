@@ -19,6 +19,10 @@
 	margin-right: 20px;
 }
 
+.withBody {
+	margin: 0;
+}
+
 .modalWindow > h3 {
 	font-family: 'GrtskPeta-Regular';
 	font-size: 16px;
@@ -51,6 +55,7 @@
 	border: none;
 	padding: 0;
 	cursor: pointer;
+	z-index: 10000;
 }
 
 .modalWindow > div {
