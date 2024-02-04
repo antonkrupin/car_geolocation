@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router";
 import cn from "classnames";
 
-import { changeOrder } from "../../slices/mainReducer";
+import { changeOrder, setModalOpen, setIsLoading, setError } from "../../slices/mainReducer";
+import { fetchIsLoading, fetchError } from "../../slices/selectors";
 
-import BackwardButton from "../../components/BackwardButton/BackwardButton";
 import TimeSelectItem from "../../components/TimeSelectItem/TimeSelectItem";
 import FilledButton from "../../components/FilledButton/FilledButton";
 import Spinner from "../../components/Spinner/Spinner";
@@ -32,8 +32,8 @@ const FreightOrderRegistration = () => {
 
   const [isTimeListHidden, setIsTimeListHidden] = useState(true);
   const [loadingSlot, setloadingSlot] = useState(TEST_TIME[0]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const isLoading = useSelector(fetchIsLoading);
+  const error = useSelector(fetchError);
 
   const timeSelectListClassName = cn("timeSelectList", "scrollable", {
     hidden: isTimeListHidden,
@@ -44,25 +44,26 @@ const FreightOrderRegistration = () => {
   });
 
   const timeSelectListHandler = () => {
-    setError(false);
+    dispatch(setError());
     setIsTimeListHidden(!isTimeListHidden);
   };
 
   const timeSelectHandler = (e) => {
     if (e.target.innerText === "12:00-15:00") {
-      setError('bookedLoadingSlot');
+      dispatch(setError('bookedLoadingSlot'));
 			setloadingSlot(e.target.innerText);
       setIsTimeListHidden(!isTimeListHidden);
     } else {
-      setError(false);
+      dispatch(setError());
       setloadingSlot(e.target.innerText);
       setIsTimeListHidden(!isTimeListHidden);
     }
   };
 
   const redirectTest = () => {
-    setLoading(false);
-    navigate(-1);
+    dispatch(setIsLoading(false));
+    dispatch(setModalOpen());
+    //navigate(-1);
   };
 
   const formHandler = (e) => {
@@ -78,11 +79,11 @@ const FreightOrderRegistration = () => {
 			TEST_CAR_COORDS[1][1]
 		);
 		if (TEST_REGISTRATION_DISTANCE < distance) {
-			setError('outOfRegistrationZone');
-			setTimeout(() => {setError(false)}, 6000);
+      dispatch(setError('outOfRegistrationZone'));
+			setTimeout(() => {dispatch(setError())}, 6000);
 		} else {
-			setLoading(true);
-			setError(false);
+      dispatch(setIsLoading(true));
+      dispatch(setError());
 			dispatch(changeOrder({ id: id, status: 1, loadingSlot: loadingSlot }));
 			setTimeout(redirectTest, 2000);
 		}
@@ -90,16 +91,15 @@ const FreightOrderRegistration = () => {
 
   return (
     <>
-      {!loading && (
+    {error && (
+      <ErrorBlock
+        show={error}
+        error={error}
+      />
+    )}
+      {!isLoading && (
         <div className="freigthOrderRegistration">
-          {error && (
-            <ErrorBlock
-              show={error}
-              error={error}
-            />
-          )}
           <div className="freightOrderRegistration__content">
-            <BackwardButton />
             <h1>
               Регистрация заказа <span>{id}</span>
             </h1>
@@ -143,7 +143,7 @@ const FreightOrderRegistration = () => {
           </div>
         </div>
       )}
-      {loading && (
+      {isLoading && (
         <div className="freigthOrderRegistration">
           <h1>Регистрация заказа</h1>
           <Spinner size="big" color="blue" />
