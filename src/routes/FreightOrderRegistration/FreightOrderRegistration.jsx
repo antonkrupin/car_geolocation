@@ -145,8 +145,10 @@ const FreightOrderRegistration = () => {
       )}
       {isLoading && (
         <div className="freigthOrderRegistration">
-          <h1>Регистрация заказа</h1>
-          <Spinner size="big" color="blue" />
+          <div className="freightOrderRegistration__content">
+            <h1>Регистрация заказа</h1>
+            <Spinner size="big" color="blue" />
+          </div>
         </div>
       )}
     </>

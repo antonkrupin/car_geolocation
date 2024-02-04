@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import cn from 'classnames';
 
 import { setModalOpen, changeOrder } from "../../slices/mainReducer";
-import { fetchIsModalOpen } from "../../slices/selectors";
+import { fetchIsModalOpen, fetchIsLoading } from "../../slices/selectors";
 
 import FreightOrderRegistration from "../../routes/FreightOrderRegistration/FreightOrderRegistration";
 import closeButton from "../../images/icons/closeButton.png";
@@ -15,6 +15,7 @@ const ModalWindow = (props) => {
 
   const dispatch = useDispatch();
   const isModalOpen = useSelector(fetchIsModalOpen);
+	const isLoading = useSelector(fetchIsLoading);
 
 	const modalWindowOverlayClassName = cn('modalWindowOverlay', {
 		'closed': !isModalOpen,
@@ -61,11 +62,13 @@ const ModalWindow = (props) => {
 			<div
 				className={modalWindowOverlayClassName}>
 				<div className={modalWindowClassName}>
-					<button
-						onClick={closeModalHandler}
-						className="closeModalButton">
-						<img src={closeButton} alt="Закрыть модальное окно" />
-					</button>
+					{!isLoading && (
+						<button
+							onClick={closeModalHandler}
+							className="closeModalButton">
+							<img src={closeButton} alt="Закрыть модальное окно" />
+						</button>
+					)}
 					<FreightOrderRegistration />
 				</div>
 			</div>

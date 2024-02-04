@@ -83,6 +83,7 @@ const FreightOrderDetails = () => {
 			dispatch(setError('outOfRegistrationCancelingZone'));
 			setTimeout(() => {setError(false)}, 6000);
 		} else {
+			setModalType();
 			dispatch(setModalOpen());
 		}
 	};

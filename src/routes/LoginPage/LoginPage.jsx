@@ -104,9 +104,9 @@ const LoginPage = () => {
   return (
     <>
       <div className="loginPage">
-          {error && (
-            <ErrorBlock show={error} error={error} />
-          )}
+        {error && (
+          <ErrorBlock show={error} error={error} />
+        )}
         <div className="loginPage__content">
           <h3>Введите номер телефона для регистрации</h3>
           <div className="loginPage__error">{error}</div>

@@ -94,7 +94,7 @@ const AccessConfirmation = () => {
             <h4>Введите код из SMS-сообщения</h4>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
-                {...register("firstCodeChar", { required: true })}
+                {...register("firstCodeChar", { required: true, })}
                 maxLength="1"
               />
               <input
