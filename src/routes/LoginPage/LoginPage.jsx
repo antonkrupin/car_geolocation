@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import { IMaskInput } from 'react-imask';
 import cn from 'classnames';
 
 import { setPhone, setOrders, setIsLoading, setError } from "../../slices/mainReducer";
@@ -16,19 +17,22 @@ import { TEST_ORDERS } from "../../assets/TEST_CONST";
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const phoneInputRef = useRef();
+  
+	const ref = useRef(null);
+	const inputRef = useRef(null);
 
-  const [phone, setPhoneNumber] = useState("+7");
+	const [isDisabled, setIsDisabled] = useState(true);
+
   const isLoading = useSelector(fetchIsLoading);
   const error = useSelector(fetchError);
 
   useEffect(() => {
-    phoneInputRef.current.focus();
+    inputRef.current.focus();
   });
 
-  const redirectTest = () => {
+  const redirectTest = (value) => {
     dispatch(setIsLoading(false));
-    const formattedPhone = phone
+    const formattedPhone = value
       .replace("+7", "8")
       .replaceAll(" ", "")
       .split("")
@@ -45,56 +49,9 @@ const LoginPage = () => {
 
   const formHandler = (e) => {
     e.preventDefault();
+		const value = inputRef.current.value;
     dispatch(setIsLoading(true));
-    setTimeout(redirectTest, 1000);
-  };
-
-  const phoneInputHandler = (e) => {
-    const value = e.target.value;
-    dispatch(setError());
-    setPhoneNumber((prev) => {
-      if (prev === "+7" && prev.length > e.target.value.length) {
-        return "+7";
-      }
-      if (prev.length < e.target.value.length) {
-        if (!isNaN(e.target.value.at(-1))) {
-          dispatch(setError());
-          switch (phone.length) {
-            case 2: {
-              let lastChar = value.at(-1);
-              e.target.value = value.slice(0, value.length - 1);
-              e.target.value += ` (${lastChar}`;
-              return e.target.value;
-            }
-            case 6: {
-              e.target.value += ") ";
-              return e.target.value;
-            }
-            case 12: {
-              let lastChar = value.at(-1);
-              e.target.value = value.slice(0, value.length - 1);
-              e.target.value += ` ${lastChar}`;
-              return e.target.value;
-            }
-            case 15: {
-              let lastChar = value.at(-1);
-              e.target.value = value.slice(0, value.length - 1);
-              e.target.value += `-${lastChar}`;
-              return e.target.value;
-            }
-            default: {
-              return e.target.value;
-            }
-          }
-        } else {
-          e.target.value = value.slice(0, value.length - 1);
-          dispatch(setError("Вводить только цифры"));
-          return prev;
-        }
-      } else {
-        return e.target.value;
-      }
-    });
+    setTimeout(() => redirectTest(value), 1000);
   };
 
   const phoneInputClassName = cn('phoneInput', {
@@ -109,24 +66,30 @@ const LoginPage = () => {
         )}
         <div className="loginPage__content">
           <h3>Введите номер телефона для регистрации</h3>
-          <div className="loginPage__error">{error}</div>
           <form onSubmit={formHandler}>
-            <div className={phoneInputClassName}>
-              <input
-                onChange={phoneInputHandler}
-                maxLength="18"
-                type="tel"
-                placeholder="+7 (999) 999 99-99"
-                value={phone}
-                ref={phoneInputRef}
-                required
-              />
-            </div>
+						<div className={phoneInputClassName}>
+							<IMaskInput
+								mask="+{7} (000) 000 00-00"
+								prepare={(appended, masked) => {
+									if (appended === '8' && masked.value === '') return '+7';
+									if (appended === '+') return '+7'
+									return appended;
+								}}
+								onComplete={() => setIsDisabled(false)}
+								onAccept={() => {
+									setIsDisabled(true);
+									dispatch(setError());
+								}}
+								ref={ref}
+								inputRef={inputRef}
+								placeholder="+7 (999) 999 99-99"
+							/>
+						</div>
             {isLoading && <FilledButton isSpinner disabled />}
             {!isLoading && (
               <FilledButton
                 buttonText="Войти"
-                disabled={phone.length === 18 ? false : true}
+                disabled={isDisabled}
               />
             )}
           </form>
