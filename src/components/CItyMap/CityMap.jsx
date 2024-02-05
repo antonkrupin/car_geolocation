@@ -44,7 +44,7 @@ const CityMap = (props) => {
 						}}
 					/>
           <Circle 
-            geometry={[TEST_KPP_COORDS, 5000]}
+            geometry={[TEST_KPP_COORDS, 2000]}
             options={{
               draggable: false,
               fillColor: "#DB709377",
