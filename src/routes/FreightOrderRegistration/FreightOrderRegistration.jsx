@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import cn from "classnames";
 
 import { changeOrder, setModalOpen, setIsLoading, setError } from "../../slices/mainReducer";
@@ -27,7 +27,6 @@ import {
 
 const FreightOrderRegistration = () => {
   const id = useParams().id;
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isTimeListHidden, setIsTimeListHidden] = useState(true);
