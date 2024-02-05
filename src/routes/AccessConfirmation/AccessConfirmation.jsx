@@ -30,7 +30,7 @@ const AccessConfirmation = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    //formState: { errors },
   } = useForm();
 
   const resendAccessCode = () => {

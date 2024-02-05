@@ -31,7 +31,7 @@ const FreightOrderDetails = () => {
 
   const {
     status,
-    city,
+    //city,
     address,
     storage,
     enterDate,
