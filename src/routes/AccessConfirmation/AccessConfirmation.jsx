@@ -62,7 +62,6 @@ const AccessConfirmation = () => {
 
   useEffect(() => {
     timer();
-    //firstInputRef.current.focus();
   }, [isCounting]);
 
   const redirectTest = (code) => {
@@ -77,12 +76,18 @@ const AccessConfirmation = () => {
     }
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     const code = Object.values(watch()).join("");
     dispatch(setIsLoading(true));
     dispatch(setCode(code));
     setTimeout(() => redirectTest(code), 1000);
   };
+
+	const focusNextInput = (e) => {
+		if (e.target.value !== '') {
+			e.target.nextSibling.focus();
+		}
+	};
 
   return (
     <>
@@ -92,16 +97,19 @@ const AccessConfirmation = () => {
           <div className="accessConfirmation__content">
             <BackwardButton />
             <h4>Введите код из SMS-сообщения</h4>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} >
               <input
+								onInput={focusNextInput}
                 {...register("firstCodeChar", { required: true, })}
                 maxLength="1"
               />
               <input
+								onInput={focusNextInput}
                 {...register("secondCodeChar", { required: true })}
                 maxLength="1"
               />
               <input
+								onInput={focusNextInput}
                 {...register("thirdCodeChar", { required: true })}
                 maxLength="1"
               />
