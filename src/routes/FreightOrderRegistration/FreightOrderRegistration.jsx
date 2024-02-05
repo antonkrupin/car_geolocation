@@ -137,6 +137,7 @@ const FreightOrderRegistration = () => {
             <hr />
             <FilledButton
               onClick={formHandler}
+							disabled={error}
               buttonText="Подтвердить время погрузки"
             />
           </div>
