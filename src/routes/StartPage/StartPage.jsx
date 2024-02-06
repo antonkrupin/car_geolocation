@@ -6,7 +6,9 @@ import "./StartPage.css";
 const StartPage = () => {
   const navigate = useNavigate();
 
-  //navigate('/geolocationAccess');
+  useEffect(() => {
+    setTimeout(() => {navigate('/geolocationAccess');}, 3000);
+  })
 
   return (
     <div className="startPage">
