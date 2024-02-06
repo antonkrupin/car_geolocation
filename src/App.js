@@ -8,7 +8,7 @@ import AccessConfirmation from "./routes/AccessConfirmation/AccessConfirmation";
 import PersonalDataConfirmation from "./routes/PersonalDataConfirmation/PersonalDataConfirmation";
 import FreightOrders from "./routes/FreightOrders/FreightOrders";
 import FreightOrderDetails from "./routes/FreightOrderDetails/FreightOrderDetails";
-import FreightOrederRegistration from "./routes/FreightOrderRegistration/FreightOrderRegistration";
+//import FreightOrederRegistration from "./routes/FreightOrderRegistration/FreightOrderRegistration";
 
 import routes from "./routes/routes";
 
@@ -38,10 +38,10 @@ const App = () => {
             path={routes.freightOrderDetails()}
             element={<FreightOrderDetails />}
           />
-          <Route
+          {/* <Route
             path={routes.freightOrederRegistration()}
             element={<FreightOrederRegistration />}
-          />
+          /> */}
         </Routes>
       </div>
     </BrowserRouter>
