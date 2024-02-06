@@ -88,9 +88,14 @@ const FreightOrderDetails = () => {
 		}
 	};
 
+	const roadMapHandler = () => {
+		setModalType('roadMap');
+		dispatch(setModalOpen());
+	}
+
   return (
 		<>
-			<ModalWindow id={id} modalBody={modalType} />
+			<ModalWindow id={id} modalType={modalType} />
 			<div className="freightOrderDetails">
 				{error && (
 					<ErrorBlock
@@ -143,7 +148,7 @@ const FreightOrderDetails = () => {
 						</div>
 					</form>
 					<hr />
-					<OutlinedButton buttonText="Посмотреть схему проезда" />
+					<OutlinedButton onClick={roadMapHandler} buttonText="Посмотреть схему проезда" />
 					{status ? (
 						<OutlinedButton onClick={orderRegistrationCancelHandler} buttonText="Отменить регистрацию" />
 					) : (
