@@ -6,6 +6,7 @@ import { setModalOpen, changeOrder } from "../../slices/mainReducer";
 import { fetchIsModalOpen, fetchIsLoading } from "../../slices/selectors";
 
 import FreightOrderRegistration from "../../routes/FreightOrderRegistration/FreightOrderRegistration";
+import { RoadMap, HomeScreenAdd } from "../ModalWindowBody/ModalWindowBody";
 import closeButton from "../../images/icons/closeButton.png";
 
 import "./ModalWindow.css";
@@ -71,9 +72,10 @@ const ModalWindow = (props) => {
 						<FreightOrderRegistration />
 					)}
 					{modalType === 'roadMap' && (
-						<div>
-							Карта проезда
-						</div>
+						<RoadMap />
+					)}
+					{modalType === 'homeScreenAdd' && (
+						<HomeScreenAdd />
 					)}
 				</div>
 			</div>
