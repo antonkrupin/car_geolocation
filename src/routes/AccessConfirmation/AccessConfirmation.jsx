@@ -100,27 +100,27 @@ const AccessConfirmation = () => {
             <form onSubmit={handleSubmit(onSubmit)} >
               <input
 								onInput={focusNextInput}
-                {...register("firstCodeChar", { required: true, })}
+                {...register("firstCodeChar", { required: true, maxLength: 1})}
                 maxLength="1"
 								type="number"
-								max="9"
-								min="0"
               />
               <input
 								onInput={focusNextInput}
                 {...register("secondCodeChar", { required: true })}
                 maxLength="1"
-								type="tel"
+								type="number"
               />
               <input
 								onInput={focusNextInput}
                 {...register("thirdCodeChar", { required: true })}
                 maxLength="1"
+								type="number"
               />
               <input
                 onInput={handleSubmit(onSubmit)}
                 {...register("fourthCodeChar", { required: true })}
                 maxLength="1"
+								type="number"
               />
             </form>
             <h3>
