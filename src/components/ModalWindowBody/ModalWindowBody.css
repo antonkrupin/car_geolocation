@@ -1,0 +1,30 @@
+.roadMap__content,
+.homeScreenAdd__content {
+  min-height: 200px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.homeScreenAdd__content {
+  margin-top: 50px;
+}
+
+.roadMap__content h1,
+.homeScreenAdd__content h1 {
+  font-family: 'GrtskPeta-Regular';
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 31px;
+	letter-spacing: 0px;
+  color: var(--main-text-color);
+}
+
+.homeScreenAdd__content h4 {
+  font-family: 'GrtskPeta-Regular';
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 17px;
+	letter-spacing: 0px;
+  color: var(--grey-color);
+  margin-top: 16px;
+}
