@@ -9,7 +9,7 @@
   width: 100%;
   flex-direction: column;
   background-color: rgba(255, 232, 232, 1);
-  padding: 30px 20px 22px 20px;
+  padding: 10px 20px 22px 20px;
 }
 
 .errorTitle {
@@ -30,6 +30,7 @@
   letter-spacing: -2%;
   color: var(--main-text-color);
   margin: 0;
+  margin-top: 10px;
 }
 
 .errorBlock-enter-active {
