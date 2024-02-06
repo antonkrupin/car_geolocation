@@ -11,7 +11,7 @@ import closeButton from "../../images/icons/closeButton.png";
 import "./ModalWindow.css";
 
 const ModalWindow = (props) => {
-	const { id, modalBody } = props;
+	const { id, modalType } = props;
 
   const dispatch = useDispatch();
   const isModalOpen = useSelector(fetchIsModalOpen);
@@ -22,7 +22,7 @@ const ModalWindow = (props) => {
 	});
 
 	const modalWindowClassName = cn('modalWindow', {
-		'withBody': modalBody,
+		'withBody': modalType,
 	})
 
 	const closeModalHandler = () => {
@@ -36,7 +36,7 @@ const ModalWindow = (props) => {
 
   return (
 		<>
-		 {!modalBody && (
+		 {!modalType && (
 			<div
 				className={modalWindowOverlayClassName}>
 				<div className={modalWindowClassName}>
@@ -47,18 +47,16 @@ const ModalWindow = (props) => {
 					</button>
 					<h3>Отмена регистрации</h3>
 					<h4>Вы действительно хотите отменить регистрацию?</h4>
-					<div>
-						<button
+					<button
 							type="submit"
 							onClick={confirmRegistrationCanceling}
 							className="confirmCancelButton">
 							Подтвердить отмену
 						</button>
-					</div>
 				</div>
 			</div>
 		 )}
-		 {modalBody && (
+		 {modalType && (
 			<div
 				className={modalWindowOverlayClassName}>
 				<div className={modalWindowClassName}>
@@ -69,7 +67,14 @@ const ModalWindow = (props) => {
 							<img src={closeButton} alt="Закрыть модальное окно" />
 						</button>
 					)}
-					<FreightOrderRegistration />
+					{modalType === 'registration' && (
+						<FreightOrderRegistration />
+					)}
+					{modalType === 'roadMap' && (
+						<div>
+							Карта проезда
+						</div>
+					)}
 				</div>
 			</div>
 		 )}
