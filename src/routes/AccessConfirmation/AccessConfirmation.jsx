@@ -102,6 +102,7 @@ const AccessConfirmation = () => {
 								onInput={focusNextInput}
                 {...register("firstCodeChar", { required: true, })}
                 maxLength="1"
+								type="number"
               />
               <input
 								onInput={focusNextInput}
