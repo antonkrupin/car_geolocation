@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import cn from 'classnames';
 
+import { setModalOpen } from "../../slices/mainReducer";
 import { fetchOrders } from "../../slices/selectors";
 
+import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import OrderItem from "../../components/OrderItem/OrderItem";
 import OutlinedButton from "../../components/OutlinedButton/OutlinedButton";
 
@@ -16,10 +18,13 @@ import profileIconGrey from "../../images/icons/user-grey.svg";
 import "./FreightOrders.css";
 
 const FreightOrders = () => {
+  const dispatch = useDispatch();
+
   const phoneId = useParams().phone;
   const orders = useSelector(fetchOrders);
 
   const [activeLink, setActiveLink] = useState("orders");
+  const [modalType, setModalType] = useState();
 
   const changeActiveLink = (e) => {
     const clickedElement = e.target.closest('.menuItem');
@@ -31,10 +36,16 @@ const FreightOrders = () => {
 
   const freigthOrdersMenuClassName = cn('freigthOrdersMenu__content', {
     'marginTop': activeLink === 'profile',
-  })
+  });
+
+  const addToHomeScreenHandler = () => {
+    setModalType('homeScreenAdd');
+    dispatch(setModalOpen());
+  }
 
   return (
     <>
+      <ModalWindow modalType={modalType} />
       <div className="freightOrders">
         {activeLink === 'orders' && (
           <div className="freightOrders__content">
@@ -52,7 +63,7 @@ const FreightOrders = () => {
               Вы можете добавить приложение на экран своего смартфона нажав кнопку
               снизу
             </h6>
-            <OutlinedButton buttonText="Добавить на домашний экран" />
+            <OutlinedButton onClick={addToHomeScreenHandler} buttonText="Добавить на домашний экран" />
           </div>
         )}
         {activeLink === 'profile' && (
