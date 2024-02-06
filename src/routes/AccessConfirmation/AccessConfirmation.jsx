@@ -100,24 +100,28 @@ const AccessConfirmation = () => {
             <form onSubmit={handleSubmit(onSubmit)} >
               <input
 								onInput={focusNextInput}
+								onFocus={(e) => e.target.value = ''}
                 {...register("firstCodeChar", { required: true, maxLength: 1})}
                 maxLength="1"
 								type="number"
               />
               <input
 								onInput={focusNextInput}
+								onFocus={(e) => e.target.value = ''}
                 {...register("secondCodeChar", { required: true })}
                 maxLength="1"
 								type="number"
               />
               <input
 								onInput={focusNextInput}
+								onFocus={(e) => e.target.value = ''}
                 {...register("thirdCodeChar", { required: true })}
                 maxLength="1"
 								type="number"
               />
               <input
                 onInput={handleSubmit(onSubmit)}
+								onFocus={(e) => e.target.value = ''}
                 {...register("fourthCodeChar", { required: true })}
                 maxLength="1"
 								type="number"
