@@ -93,10 +93,12 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+	appearance: none;
 }
 input[type="number"]:hover,
 input[type="number"]:focus {
   -moz-appearance: number-input;
+	appearance: none;
 }
 
 input[type=number]::-webkit-inner-spin-button,
