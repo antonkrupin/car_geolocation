@@ -81,7 +81,7 @@ const FreightOrderDetails = () => {
 		);
 		if (TEST_REGISTRATION_DISTANCE < distance) {
 			dispatch(setError('outOfRegistrationCancelingZone'));
-			setTimeout(() => {setError(false)}, 6000);
+			setTimeout(() => {dispatch(setError())}, 6000);
 		} else {
 			setModalType();
 			dispatch(setModalOpen());
