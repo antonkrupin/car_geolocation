@@ -3,12 +3,21 @@ import { useNavigate } from 'react-router';
 
 import cn from 'classnames';
 
-import truckIcon from '../../images/icons/truck.png';
-import detailButton from '../../images/icons/detailButton.png';
+// import truckIcon from '../../images/icons/truck.png';
+// import detailButton from '../../images/icons/detailButton.png';
+import { IMAGES } from '../../images/Images';
 
 import './OrderItem.css';
 
-const OrderItem = (props) => {
+interface OrderItem {
+	order: {
+		id: string,
+		status: number,
+		city: string,
+	},
+}
+
+const OrderItem: React.FC<OrderItem> = (props) => {
 	const { order } = props;
 	
 	const navigate = useNavigate();
@@ -23,7 +32,7 @@ const OrderItem = (props) => {
 
 	return (
 		<div className="orderItem">
-			<img src={truckIcon} alt="Иконка грузовика"/>
+			<img src={IMAGES.truckIcon} alt="Иконка грузовика"/>
 			<div>
 				<h3 className="orderItem_id">{order.id}</h3>
 				<h4 className="orderItem_city">{order.city}</h4>
@@ -33,7 +42,7 @@ const OrderItem = (props) => {
 				onClick={buttonHandler}
 				className="orderItem_button"
 			>
-				<img src={detailButton} alt="Детали заказа"/>
+				<img src={IMAGES.detailButton} alt="Детали заказа"/>
 			</button>
 		</div>
 	)

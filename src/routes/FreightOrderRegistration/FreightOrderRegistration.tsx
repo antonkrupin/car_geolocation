@@ -11,9 +11,10 @@ import FilledButton from "../../components/FilledButton/FilledButton";
 import Spinner from "../../components/Spinner/Spinner";
 import ErrorBlock from "../../components/ErrorBlock/ErrorBlock";
 
-import calendarIcon from "../../images/icons/calendar-2.png";
-import calendarIconError from "../../images/icons/calendarError.png";
-import dropDownIcon from "../../images/icons/chevron-down.png";
+// import calendarIcon from "../../images/icons/calendar-2.png";
+// import calendarIconError from "../../images/icons/calendarError.png";
+// import dropDownIcon from "../../images/icons/chevron-down.png";
+import { IMAGES } from "../../images/Images";
 
 import "./FreightOrderRegistration.css";
 
@@ -25,12 +26,12 @@ import {
   getDistanceFromLatLonInKm,
 } from "../../assets/TEST_CONST";
 
-const FreightOrderRegistration = () => {
-  const id = useParams().id;
+const FreightOrderRegistration: React.FC = () => {
+  const id = useParams().id!;
   const dispatch = useDispatch();
 
-  const [isTimeListHidden, setIsTimeListHidden] = useState(true);
-  const [loadingSlot, setloadingSlot] = useState(TEST_TIME[0]);
+  const [isTimeListHidden, setIsTimeListHidden] = useState<boolean>(true);
+  const [loadingSlot, setloadingSlot] = useState<string>(TEST_TIME[0]);
   const isLoading = useSelector(fetchIsLoading);
   const error = useSelector(fetchError);
 
@@ -43,29 +44,29 @@ const FreightOrderRegistration = () => {
   });
 
   const timeSelectListHandler = () => {
-    dispatch(setError());
+    dispatch(setError(''));
     setIsTimeListHidden(!isTimeListHidden);
   };
 
-  const timeSelectHandler = (e) => {
-    if (e.target.innerText === "12:00-15:00") {
+  const timeSelectHandler = (e: React.MouseEvent<HTMLSpanElement>) => {
+    if (e.currentTarget.innerText === "12:00-15:00") {
       dispatch(setError('bookedLoadingSlot'));
-			setloadingSlot(e.target.innerText);
+			setloadingSlot(e.currentTarget.innerText);
       setIsTimeListHidden(!isTimeListHidden);
     } else {
-      dispatch(setError());
-      setloadingSlot(e.target.innerText);
+      dispatch(setError(''));
+      setloadingSlot(e.currentTarget.innerText);
       setIsTimeListHidden(!isTimeListHidden);
     }
   };
 
   const redirectTest = () => {
-    dispatch(setIsLoading(false));
+    dispatch(setIsLoading());
     dispatch(setModalOpen());
     //navigate(-1);
   };
 
-  const formHandler = (e) => {
+  const formHandler = (e: React.FormEvent) => {
 		e.preventDefault();
 		//TEST_CAR_COORDS[0] - не в радиусе
 		//TEST_CAR_COORDS[1] - в радиусе
@@ -79,10 +80,10 @@ const FreightOrderRegistration = () => {
 		);
 		if (TEST_REGISTRATION_DISTANCE < distance) {
       dispatch(setError('outOfRegistrationZone'));
-			setTimeout(() => {dispatch(setError())}, 6000);
+			setTimeout(() => {dispatch(setError(''))}, 6000);
 		} else {
-      dispatch(setIsLoading(true));
-      dispatch(setError());
+      dispatch(setIsLoading());
+      dispatch(setError(''));
 			dispatch(changeOrder({ id: id, status: 1, loadingSlot: loadingSlot }));
 			setTimeout(redirectTest, 2000);
 		}
@@ -92,7 +93,7 @@ const FreightOrderRegistration = () => {
     <>
     {error && (
       <ErrorBlock
-        show={error}
+        show={error ? true : false}
         error={error}
       />
     )}
@@ -105,11 +106,11 @@ const FreightOrderRegistration = () => {
             <h4>Для регистрации проверьте корректность слота погрузки</h4>
             <div onClick={timeSelectListHandler} className={timeSelectClassName}>
               <img
-                src={error === 'bookedLoadingSlot' ? calendarIconError : calendarIcon}
+                src={error === 'bookedLoadingSlot' ? IMAGES.calendarIconError : IMAGES.calendarIcon}
                 alt="Иконка календаря"
               />
               <h3>{loadingSlot}</h3>
-              <img src={dropDownIcon} alt="Раскрыть список" />
+              <img src={IMAGES.dropDownIcon} alt="Раскрыть список" />
             </div>
             <div className={timeSelectListClassName}>
               {TEST_TIME.map((time, index) => (
@@ -137,7 +138,7 @@ const FreightOrderRegistration = () => {
             <hr />
             <FilledButton
               onClick={formHandler}
-							disabled={error}
+							disabled={error ? true : false}
               buttonText="Подтвердить время погрузки"
             />
           </div>

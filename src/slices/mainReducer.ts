@@ -1,11 +1,46 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-	error: null,
-	coords: null,
+type State = {
+	error: string,
+	coords: number[],
+	geolocationAccess: boolean,
+	phone: string,
+	personalData: string[],
+	orders: {
+		id: string,
+		status: number,
+		city: string,
+		address: string,
+		storage: string,
+		enterDate: string,
+		loadingSlot: string,
+		carNumber: string,
+		priority: string,
+	}[],
+	code: string,
+	isModalOpen: boolean,
+	isLoading: boolean,
+}
+
+const initialState: State = {
+	error: '',
+	coords: [],
 	geolocationAccess: false,
 	phone: '',
-	orders: [],
+	personalData: [],
+	orders: [
+		{
+			id: "410045634",
+			status: 0,
+			city: "Череповец",
+			address: "г. Череповец, улица 8-го марта, дом 54",
+			storage: "324-Череповец-М",
+			enterDate: "12.02.24",
+			loadingSlot: "11:00-16:00",
+			carNumber: "a202aa",
+			priority: "1",
+		},
+	],
 	code: '',
 	isModalOpen: false,
 	isLoading: false,
@@ -19,16 +54,19 @@ const slice = createSlice({
 			state.coords = action.payload;
 		},
 		setGeolocationAccess: (state, action) => {
-			state.geolocationAccess = !state.geolocationAccess;
+			state.geolocationAccess = action.payload;
 		},
 		changeOrder: (state, action) => {
 			const { id, status, loadingSlot } = action.payload;
-			state.orders[1].forEach((order) => {
+			state.orders.forEach((order: {id: string, status: number, loadingSlot: string}) => {
 				if (order.id === id) {
 					order.status = status;
 					order.loadingSlot = loadingSlot || order.loadingSlot;
 				}
 			})
+		},
+		setPersonalData: (state, action) => {
+			state.personalData = action.payload;
 		},
 		setPhone: (state, action) => {
 			state.phone = action.payload;
@@ -42,10 +80,10 @@ const slice = createSlice({
 		setError: (state, action) => {
 			state.error = action.payload;
 		},
-		setModalOpen: (state, action) => {
+		setModalOpen: (state) => {
 			state.isModalOpen = !state.isModalOpen;
 		},
-		setIsLoading: (state, action) => {
+		setIsLoading: (state) => {
 			state.isLoading = !state.isLoading;
 		}
 	}
@@ -55,6 +93,7 @@ export const {
 	setCoords,
 	setGeolocationAccess,
 	changeOrder,
+	setPersonalData,
 	setPhone,
 	setCode,
 	setOrders,

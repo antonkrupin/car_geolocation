@@ -1,26 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+
+import { fetchGeolocationAccess } from "../../slices/selectors";
+import { setCoords, setGeolocationAccess } from "../../slices/mainReducer";
 
 import "./GeolocationAccess.css";
 
-const GeolocationAccess = () => {
+const GeolocationAccess: React.FC = () => {
   const navigate = useNavigate();
-  const [geolocationAccess, setGeolocationAccess] = useState(true);
+  const dispatch = useDispatch();
+  const geolocationAccess = useSelector(fetchGeolocationAccess);
+  //const [geolocationAccess, setGeolocationAccess] = useState<boolean>(true);
 
-  /*useEffect(() => {
+  useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        //dispatch(setCoords([position.coords.latitude, position.coords.longitude]));
-        //dispatch(setGeolocationAccess());
+        dispatch(setCoords([position.coords.latitude, position.coords.longitude]));
+        dispatch(setGeolocationAccess(true));
         navigate("/login");
       },
       (error) => {
-        //dispatch(setError('Функционал приложения недоступн без геолокации.'));
+        //dispatch(setError('Функционал приложения недоступен без геолокации.'));
         setGeolocationAccess(false);
         console.log(error);
       }
     );
-  }, []);*/
+  }, []);
 
   return (
     <div className="geolocationAccess">

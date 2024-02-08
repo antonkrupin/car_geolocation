@@ -5,7 +5,12 @@ import i18next from '../../assets/i18next';
 
 import './ErrorBlock.css';
 
-const ErrorBlock = (props) => {
+interface ErrorBlock {
+	show: boolean,
+	error: string,
+}
+
+const ErrorBlock: React.FC<ErrorBlock> = (props) => {
   const { show, error } = props;
   const errorBlockClassName = cn('errorBlock__content', {
     'errorBlock-enter-active': show,

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 
 import "./StartPage.css";
 
-const StartPage = () => {
+const StartPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {

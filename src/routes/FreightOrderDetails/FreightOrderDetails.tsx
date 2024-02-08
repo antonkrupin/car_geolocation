@@ -20,15 +20,16 @@ import {
   getDistanceFromLatLonInKm,
 } from "../../assets/TEST_CONST";
 
-const FreightOrderDetails = () => {
+const FreightOrderDetails: React.FC = () => {
 	const dispatch = useDispatch();
 	
-	const [modalType, setModalType] = useState();
+	const [modalType, setModalType] = useState<string>('');
+	
 	const error = useSelector(fetchError);
+  const orders = useSelector(fetchOrders);
 
-  const orders = useSelector(fetchOrders)[1];
-  const id = useParams().id;
-
+  const id = useParams().id!;
+		
   const {
     status,
     //city,
@@ -38,10 +39,10 @@ const FreightOrderDetails = () => {
     loadingSlot,
     carNumber,
     priority,
-  } = orders.filter((order) => order.id === id)[0];
+  } = orders.filter((order: {id: string}) => order.id === id)[0];
 
   const orderRegistrationHandler = () => {
-    const registeredOrders = orders.filter((order) => order.status === 1);
+    const registeredOrders = orders.filter((order: { status: number }) => order.status === 1);
 		//TEST_CAR_COORDS[0] - не в радиусе
 		//TEST_CAR_COORDS[1] - в радиусе
 		//TEST_CAR_COORDS[2] - не в радиусе, но очень близко
@@ -56,11 +57,11 @@ const FreightOrderDetails = () => {
 			if (registeredOrders.length !== 0) {
 				dispatch(setError('haveRegesteredOrder'));
 				setTimeout(() => {
-					dispatch(setError());
+					dispatch(setError(''));
 				}, 6000);
 			} else {
 				dispatch(setError('outOfRegistrationZone'));
-				setTimeout(() => {dispatch(setError())}, 6000);
+				setTimeout(() => {dispatch(setError(''))}, 6000);
 			}
 		} else {
 			setModalType('registration');
@@ -81,9 +82,9 @@ const FreightOrderDetails = () => {
 		);
 		if (TEST_REGISTRATION_DISTANCE < distance) {
 			dispatch(setError('outOfRegistrationCancelingZone'));
-			setTimeout(() => {dispatch(setError())}, 6000);
+			setTimeout(() => {dispatch(setError(''))}, 6000);
 		} else {
-			setModalType();
+			setModalType('');
 			dispatch(setModalOpen());
 		}
 	};
@@ -99,7 +100,7 @@ const FreightOrderDetails = () => {
 			<div className="freightOrderDetails">
 				{error && (
 					<ErrorBlock
-						show={error}
+						show={error ? true : false}
 						error={error}
 					/>
 				)}
@@ -108,7 +109,7 @@ const FreightOrderDetails = () => {
 					<h1>
 						Заказ <span>{id}</span>
 					</h1>
-					<span className={status && "registered"}>
+					<span className={status === 1 ? "registered" : ''}>
 						{status ? "Зарегистрирован" : "Не зарегистрирован"}
 					</span>
 					<div className="freightOrderDetails__div">

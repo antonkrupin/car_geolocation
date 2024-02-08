@@ -2,7 +2,14 @@ import React from "react";
 
 import "./FilledButton.css";
 
-const FilledButton = (props) => {
+interface FilledButton {
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
+  buttonText?: string,
+  disabled?: boolean,
+  isSpinner?: boolean,
+}
+
+const FilledButton: React.FC<FilledButton> = (props) => {
   const { onClick, buttonText, disabled, isSpinner } = props;
 
   return (

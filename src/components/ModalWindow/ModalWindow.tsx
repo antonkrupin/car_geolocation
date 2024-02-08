@@ -7,11 +7,18 @@ import { fetchIsModalOpen, fetchIsLoading } from "../../slices/selectors";
 
 import FreightOrderRegistration from "../../routes/FreightOrderRegistration/FreightOrderRegistration";
 import { RoadMap, HomeScreenAdd } from "../ModalWindowBody/ModalWindowBody";
-import closeButton from "../../images/icons/closeButton.png";
+// import closeButton from "../../images/icons/closeButton.png";
+
+import { IMAGES } from "../../images/Images";
 
 import "./ModalWindow.css";
 
-const ModalWindow = (props) => {
+interface ModalWindow {
+	id?: string,
+	modalType?: string,
+}
+
+const ModalWindow: React.FC<ModalWindow> = (props) => {
 	const { id, modalType } = props;
 
   const dispatch = useDispatch();
@@ -44,7 +51,7 @@ const ModalWindow = (props) => {
 					<button
 						onClick={closeModalHandler}
 						className="closeModalButton">
-						<img src={closeButton} alt="Закрыть модальное окно" />
+						<img src={IMAGES.closeButton} alt="Закрыть модальное окно" />
 					</button>
 					<h3>Отмена регистрации</h3>
 					<h4>Вы действительно хотите отменить регистрацию?</h4>
@@ -65,7 +72,7 @@ const ModalWindow = (props) => {
 						<button
 							onClick={closeModalHandler}
 							className="closeModalButton">
-							<img src={closeButton} alt="Закрыть модальное окно" />
+							<img src={IMAGES.closeButton} alt="Закрыть модальное окно" />
 						</button>
 					)}
 					{modalType === 'registration' && (

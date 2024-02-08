@@ -2,7 +2,13 @@ import React from "react";
 
 import "./OutlinedButton.css";
 
-const OutlinedButton = (props) => {
+interface OutlinedButton {
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  buttonText?: string;
+  disabled?: boolean;
+}
+
+const OutlinedButton: React.FC<OutlinedButton> = (props) => {
   const { onClick, buttonText, disabled } = props;
   return (
     <button className="outlinedButton" onClick={onClick} disabled={disabled}>

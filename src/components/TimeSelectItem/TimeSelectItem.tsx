@@ -2,7 +2,12 @@ import React from 'react';
 
 import './TimeSelectItem.css';
 
-const TimeSelectItem = (props) => {
+interface TimeSelectItem {
+  text: string, 
+  onClick: (e: React.MouseEvent<HTMLDivElement>) => void,
+}
+
+const TimeSelectItem: React.FC<TimeSelectItem> = (props) => {
   const { onClick, text} = props;
   return (
     <span

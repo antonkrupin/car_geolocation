@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IMaskInput } from 'react-imask';
 import cn from 'classnames';
 
-import { setPhone, setOrders, setIsLoading, setError } from "../../slices/mainReducer";
+import { setPhone, setOrders, setIsLoading, setError, setPersonalData } from "../../slices/mainReducer";
 import { fetchIsLoading, fetchError } from "../../slices/selectors";
 
 import FilledButton from "../../components/FilledButton/FilledButton";
@@ -12,34 +12,37 @@ import ErrorBlock from '../../components/ErrorBlock/ErrorBlock';
 
 import "./LoginPage.css";
 
-import { TEST_ORDERS } from "../../assets/TEST_CONST";
+import { TEST_ORDERS, TEST_PHONES } from "../../assets/TEST_CONST";
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-	const ref = useRef(null);
-	const inputRef = useRef(null);
+	const ref = useRef<HTMLInputElement>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 
-	const [isDisabled, setIsDisabled] = useState(true);
+	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const isLoading = useSelector(fetchIsLoading);
   const error = useSelector(fetchError);
 
   useEffect(() => {
-    inputRef.current.focus();
+    if (inputRef.current) inputRef.current.focus();
   });
 
-  const redirectTest = (value) => {
-    dispatch(setIsLoading(false));
+  const redirectTest = (value: string) => {
+    dispatch(setIsLoading());
     const formattedPhone = value
       .replace("+7", "8")
       .replaceAll(" ", "")
       .split("")
-      .filter((el) => !isNaN(Number(el)))
+      .filter((el: string) => !isNaN(Number(el)))
       .join("");
-    if (TEST_ORDERS[formattedPhone]) {
-      dispatch(setOrders(TEST_ORDERS[formattedPhone]));
+
+    if (TEST_PHONES.indexOf(formattedPhone) !== -1) {
+      const orders = TEST_ORDERS.filter((order) => order.id === formattedPhone)[0];
+      dispatch(setOrders(orders.orders));
+      dispatch(setPersonalData(orders.personalData));
       dispatch(setPhone(formattedPhone));
       navigate("/accessConfirmation");
     } else {
@@ -47,10 +50,11 @@ const LoginPage = () => {
     }
   };
 
-  const formHandler = (e) => {
+  const formHandler = (e: React.FormEvent) => {
     e.preventDefault();
-		const value = inputRef.current.value;
-    dispatch(setIsLoading(true));
+    let value: string;
+    if (inputRef.current) value = inputRef.current.value;
+    dispatch(setIsLoading());
     setTimeout(() => redirectTest(value), 1000);
   };
 
@@ -62,7 +66,7 @@ const LoginPage = () => {
     <>
       <div className="loginPage">
         {error && (
-          <ErrorBlock show={error} error={error} />
+          <ErrorBlock show={error ? true : false} error={error} />
         )}
         <div className="loginPage__content">
           <h3>Введите номер телефона для регистрации</h3>
@@ -78,7 +82,7 @@ const LoginPage = () => {
 								onComplete={() => setIsDisabled(false)}
 								onAccept={() => {
 									setIsDisabled(true);
-									dispatch(setError());
+									dispatch(setError(false));
 								}}
                 type="tel"
 								ref={ref}

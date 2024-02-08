@@ -2,7 +2,7 @@ import React from 'react';
 
 import './ModalWindowBody.css';
 
-export const RoadMap = () => {
+export const RoadMap: React.FC = () => {
   return (
     <div className="roadMap">
       <div className="roadMap__content">
@@ -12,7 +12,7 @@ export const RoadMap = () => {
   )
 };
 
-export const HomeScreenAdd = () => {
+export const HomeScreenAdd: React.FC = () => {
   return (
     <div className="homeScreenAdd">
       <div className="homeScreenAdd__content">

@@ -3,7 +3,12 @@ import cn from 'classnames';
 
 import './Spinner.css';
 
-const Spinner = (props) => {
+interface Spinner {
+	size: string,
+	color: string,
+}
+
+const Spinner: React.FC<Spinner> = (props) => {
 	const { size, color } = props;
 	const spinnerClassName = cn ({
 		'blueSpinner': color,

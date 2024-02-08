@@ -14,14 +14,14 @@ import "./AccessConfirmation.css";
 
 import { TEST_COUNTER_VALUE, TEST_PHONE_CODE } from "../../assets/TEST_CONST";
 
-const AccessConfirmation = () => {
+const AccessConfirmation: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const phone = useSelector(fetchPhone);
 
-  const [counter, setCounter] = useState(TEST_COUNTER_VALUE);
-  const [isCounting, setIsCounting] = useState(false);
+  const [counter, setCounter] = useState<number>(TEST_COUNTER_VALUE);
+  const [isCounting, setIsCounting] = useState<boolean>(false);
 
   const isLoading = useSelector(fetchIsLoading);
   const error = useSelector(fetchError);
@@ -38,7 +38,7 @@ const AccessConfirmation = () => {
     setCounter(TEST_COUNTER_VALUE);
   };
 
-  const hidePhoneNumbers = (phone) => {
+  const hidePhoneNumbers = (phone: string) => {
     return [...phone].map((el, index) => {
       if (index > 4 && index < 9) {
         return "*";
@@ -50,12 +50,12 @@ const AccessConfirmation = () => {
 
   const timer = () => {
     const intervalId = setInterval(() => {
-      setCounter((prev, curr) => {
+      setCounter((prev) => {
         if (prev - 1 === 0) {
           clearInterval(intervalId);
           setIsCounting(false);
         }
-        return (curr = prev - 1);
+        return (prev - 1);
       });
     }, 1000);
   };
@@ -64,67 +64,63 @@ const AccessConfirmation = () => {
     timer();
   }, [isCounting]);
 
-  const redirectTest = (code) => {
-    dispatch(setIsLoading(false));
+  const redirectTest = (code: string) => {
+    dispatch(setIsLoading());
     if (Number(code) === Number(TEST_PHONE_CODE)) {
       navigate(`/personalDataConfirmation/${phone}`);
     } else {
       dispatch(setError("wrongSmsCode"));
       setTimeout(() => {
-        dispatch(setError());
+        dispatch(setError(''));
       }, 6000);
     }
   };
 
   const onSubmit = () => {
     const code = Object.values(watch()).join("");
-    dispatch(setIsLoading(true));
+    dispatch(setIsLoading());
     dispatch(setCode(code));
     setTimeout(() => redirectTest(code), 1000);
   };
 
-	const focusNextInput = (e) => {
-		if (e.target.value !== '') {
-			e.target.nextSibling.focus();
-		}
-	};
+  const focusNextInput = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (e.target.value !== "") {
+      (e.target.nextSibling as HTMLInputElement)?.focus();
+    }
+  };
 
   return (
     <>
       {!isLoading && (
         <div className="accessConfirmation">
-          {error && <ErrorBlock show={error} error={error} />}
+          {error && <ErrorBlock show={error ? true : false} error={error} />}
           <div className="accessConfirmation__content">
             <BackwardButton />
             <h4>Введите код из SMS-сообщения</h4>
-            <form onSubmit={handleSubmit(onSubmit)} >
+            <form onSubmit={handleSubmit(onSubmit)}>
               <input
-								onInput={focusNextInput}
-								onFocus={(e) => e.target.value = ''}
-                {...register("firstCodeChar", { required: true, maxLength: 1})}
-                maxLength="1"
-								type="number"
+                onInput={focusNextInput}
+                onFocus={(e) => (e.target.value = "")}
+                {...register("firstCodeChar", { required: true })}
+                type="number"
               />
               <input
-								onInput={focusNextInput}
-								onFocus={(e) => e.target.value = ''}
+                onInput={focusNextInput}
+                onFocus={(e) => (e.target.value = "")}
                 {...register("secondCodeChar", { required: true })}
-                maxLength="1"
-								type="number"
+                type="number"
               />
               <input
-								onInput={focusNextInput}
-								onFocus={(e) => e.target.value = ''}
+                onInput={focusNextInput}
+                onFocus={(e) => (e.target.value = "")}
                 {...register("thirdCodeChar", { required: true })}
-                maxLength="1"
-								type="number"
+                type="number"
               />
               <input
                 onInput={handleSubmit(onSubmit)}
-								onFocus={(e) => e.target.value = ''}
+                onFocus={(e) => (e.target.value = "")}
                 {...register("fourthCodeChar", { required: true })}
-                maxLength="1"
-								type="number"
+                type="number"
               />
             </form>
             <h3>
